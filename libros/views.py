@@ -27,3 +27,13 @@ def Detalles(request, id):
     }
 
     return render(request, 'detalles.html', context)
+
+def Borrar(request, id):
+
+    libro = get_object_or_404(Libro, pk=id)
+
+    //obtenemos le libro con la pk y lo borramos
+    libro.delete()
+
+    //volvemos a redirigir a la lista de libros
+    return redirect('lista')
