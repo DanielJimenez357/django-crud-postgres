@@ -20,6 +20,10 @@ from libros import views as vistas
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path("lista/", vistas.lista,  name="lista")
+    path("", vistas.home,  name="lista"),
+    path("lista/", vistas.lista,  name="lista"),
+    path("nuevolibro/", vistas.nuevoLibro,  name="nuevoLibro"),
+    path("borrar/<int:id>", vistas.borrar,  name="borrar"),
+    path("editar/<int:id>", vistas.editarLibro,  name="editar"),
+    path("detalle/<int:id>", vistas.detalles,  name="detalles"),
 ]

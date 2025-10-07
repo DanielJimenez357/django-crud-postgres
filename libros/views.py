@@ -4,6 +4,10 @@ from .forms import LibroForm
 
 # Create your views here.
 
+def home(request):
+    return redirect('lista')
+
+
 def lista(request):
     lista = Libro.objects.all()
 
@@ -27,7 +31,7 @@ def detalles(request, id):
         'descripcion': libro.descripcion,
     }
 
-    return render(request, 'detalles.html', context)
+    return render(request, 'detalle.html', context)
 
 def borrar(request, id):
 
