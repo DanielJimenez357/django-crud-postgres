@@ -26,4 +26,6 @@ urlpatterns = [
     path("borrar/<int:id>", vistas.borrar,  name="borrar"),
     path("editar/<int:id>", vistas.editarLibro,  name="editar"),
     path("detalle/<int:id>", vistas.detalles,  name="detalles"),
+    path("lista/api", vistas.listaApi,  name="api"),
+
 ]

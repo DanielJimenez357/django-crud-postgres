@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from .forms import LibroForm
 
 # Create your views here.
@@ -82,3 +85,26 @@ def editarLibro(request, id):
     }
 
     return render(request, 'nuevo_libro.html', context)
+
+@csrf_exempt
+def listaApi(request):
+
+    #peticion GET, obtenemos todos los libros y los parseamos a json para despues mostrarlos
+    if request.method == 'GET':
+        libros = Libro.objects.all()
+        data = list(libros.values('isbn', 'titulo', 'autor', 'descripcion'))
+        return JsonResponse(data, safe=False)
+
+    #peticion POST, obtenemos el cuerpo de la peticion con los datos necesarios para crear el nuevo libro
+    else:
+        data = json.loads(request.body)
+
+        libro = Libro.objects.create(
+                isbn=data['isbn'],
+                titulo=data['titulo'],
+                autor=data['autor'],
+                descripcion=data['descripcion'],
+            )
+
+        #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
+        return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
