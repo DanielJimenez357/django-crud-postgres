@@ -17,6 +17,8 @@
     <h5 class="card-title">{{titulo}}</h5>
     <h6 class="card-subtitle mb-2 text-body-secondary">{{autor}}</h6>
     <p class="card-text">{{descripcion}}</p>
+    <p class="card-text">ISBN: {{isbn}}</p>
+
             <a class="btn btn-danger" href="{% url 'borrar' isbn %}" role="button">Eliminar</a>
             <a class="btn btn-success" href="{% url 'editar' isbn %}" role="button">Editar</a>
 

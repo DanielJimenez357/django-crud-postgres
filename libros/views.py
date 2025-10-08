@@ -4,6 +4,7 @@ import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .forms import LibroForm
+from django.core import serializers
 
 # Create your views here.
 
@@ -96,15 +97,53 @@ def listaApi(request):
         return JsonResponse(data, safe=False)
 
     #peticion POST, obtenemos el cuerpo de la peticion con los datos necesarios para crear el nuevo libro
-    else:
-        data = json.loads(request.body)
+    elif request.method == 'POST':
 
-        libro = Libro.objects.create(
+        try:
+            data = json.loads(request.body)
+
+            Libro.objects.create(
                 isbn=data['isbn'],
                 titulo=data['titulo'],
                 autor=data['autor'],
                 descripcion=data['descripcion'],
             )
 
-        #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
-        return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
+            #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
+            return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
+        
+        #capturamos el error para devolverlo en caso de que surja algun problema
+        except Exception as e:
+            return JsonResponse({'mensaje': 'Ha habido un error con los datos del libro en su creacion', 'error': str(e)})
+
+    elif request.method == 'PUT':
+        try:
+            data = json.loads(request.body)
+            #obtenenmos el libro con el mismo isbn de la base de datos y lo asignamos a una variable para cambiarlo
+            libro_a_editar = get_object_or_404(Libro, pk=data['isbn'])
+
+            libro_a_editar.isbn = data['isbn']
+            libro_a_editar.titulo = data['titulo']
+            libro_a_editar.autor = data['autor']
+            libro_a_editar.descripcion = data['descripcion']
+            #guardamos los cambios
+            libro_a_editar.save()
+                
+            
+            return JsonResponse({'mensaje': 'libro actualizado exitosamente'}, status=201)
+
+        except Exception as e:
+            return JsonResponse({'mensaje': 'Ha habido un error con los datos del libro en su modificacion', 'error': str(e)})
+
+    elif request.method == 'DELETE':
+        
+        data = json.loads(request.body)
+        #si no encontramos el objeto levantamos una excepcion
+        try:
+            libro_a_editar = get_object_or_404(Libro, pk=data['isbn'])
+        except:
+            return JsonResponse({'mensaje': 'No se ha encontrado ningun libro con ese ISBN'})
+        libro_a_editar.delete()
+        return JsonResponse({'mensaje': 'libro borrado exitosamente'})
+
+
