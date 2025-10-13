@@ -1,3 +1,5 @@
+from os.path import splitext
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro
 import json
@@ -41,6 +43,9 @@ def borrar(request, id):
 
     libro = get_object_or_404(Libro, pk=id)
 
+    os.remove('./libros/media/' + libro.imagen.name )
+    
+
     #obtenemos el libro con la pk y lo borramos
     libro.delete()
 
@@ -51,9 +56,17 @@ def nuevoLibro(request):
 
     #comprobamos el metodo de envio si es POST se trata de un formulario ya editado
     if request.method == 'POST':
-        form = LibroForm(request.POST)
+        form = LibroForm(request.POST, request.FILES)
+        
         if form.is_valid(): #comprobamos que sea valido
-            form.save() #guardamos y redirigimos
+
+            #obtenemos los datos del formulario sin guardarlo en la base de datos
+            libro = form.save(commit=False)
+            #obtenemos la extension del archivo
+            extension = splitext(libro.imagen.name)[1]
+            #cambiamos el nombre del archivo al titulo del libro
+            libro.imagen.name = form.cleaned_data['titulo'] + extension
+            libro.save()
             return redirect('lista')
 
     #si la solicitud es get rellenamos el formulario con los datos actuales
@@ -70,10 +83,33 @@ def editarLibro(request, id):
 
     libro_editado = get_object_or_404(Libro, pk=id)
 
+    nombre_imagen = libro_editado.imagen.name
+
     #comprobamos el metodo de envio si es POST se trata de un formulario relleno
     if request.method == 'POST':
-        form = LibroForm(request.POST, instance=libro_editado)
+        form = LibroForm(request.POST, request.FILES , instance=libro_editado)
         if form.is_valid(): #comprobamos que sea valido
+
+            libro = form.save(commit=False)
+
+            #obtenemos la extension del archivo
+            extension = splitext(libro.imagen.name)[1]
+
+            if libro.imagen.name != nombre_imagen:
+                os.remove('./libros/media/' + nombre_imagen )
+                libro.imagen.save(form.cleaned_data['titulo'] + extension, libro.imagen.file, save=False)
+                
+            else:
+                nombre_a_cambiar = libro.imagen.name
+                media_url = './libros/media/'
+
+                #cambiamos el nombre del archivo al titulo del libro
+                libro.imagen.name = 'images/' + form.cleaned_data['titulo'] + extension
+
+                os.replace(media_url + nombre_a_cambiar , media_url + libro.imagen.name)
+
+            libro.save()
+
             form.save() #guardamos y redirigimos
             return redirect('lista')
 

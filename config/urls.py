@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from libros import views as vistas
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +29,6 @@ urlpatterns = [
     path("editar/<int:id>", vistas.editarLibro,  name="editar"),
     path("detalle/<int:id>", vistas.detalles,  name="detalles"),
     path("lista/api", vistas.listaApi,  name="api"),
-
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -7,4 +7,4 @@ class LibroForm(forms.ModelForm):
 
         model = Libro
 
-        fields = ['isbn', 'titulo', 'autor', 'descripcion']
+        fields = ['isbn', 'titulo', 'autor', 'descripcion', 'imagen']
