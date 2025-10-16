@@ -1,3 +1,4 @@
 .env
 libros/media
 venv
+libros/migrations

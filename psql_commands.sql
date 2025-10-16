@@ -1,0 +1,5 @@
+CREATE DATABASE libreria WITH ENCODING 'UTF8' LC_COLLATE='Spanish_Spain.1252' LC_CTYPE='Spanish_Spain.1252';
+CREATE ROLE :usuario WITH LOGIN PASSWORD :'us_contrasena';
+GRANT ALL PRIVILEGES ON DATABASE libreria TO :usuario;
+ALTER DATABASE libreria OWNER TO :usuario;
+\q
