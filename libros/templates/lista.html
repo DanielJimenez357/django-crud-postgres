@@ -1,29 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+
     <a class="btn btn-primary" href="{% url 'nuevoLibro' %}" role="button">Nuevo libro</a>
-    <div style="display: flex;">
-        
-        {% for libro in lista %}
-        <div class="card" style="width: 18rem;">
-            <img src="{{ MEDIA_URL }}{{ libro.imagen }}" class="card-img-top">
-            <div class="card-body">
-                <h5 class="mb-1">{{libro.titulo}}</h5>
-                <p class="mb-1">{{libro.autor}}</p>
-                <a class="btn btn-success" href="{% url 'detalles' libro.isbn %}" role="button">Detalles</a>
+        <div style="display: flex;">
+            
+            {% for libro in lista %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{ MEDIA_URL }}{{ libro.imagen }}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="mb-1">{{libro.titulo}}</h5>
+                    <p class="mb-1">{{libro.autor}}</p>
+                    <a class="btn btn-success" href="{% url 'detalles' libro.isbn %}" role="button">Detalles</a>
+            </div>
         </div>
-    </div>
-    
-    
-    {% endfor %}
+        
+        
+        {% endfor %}
+    {% endblock content %}
 </div>
-</body>
-</html>

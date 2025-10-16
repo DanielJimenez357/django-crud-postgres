@@ -5,7 +5,7 @@ from .models import Libro
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .forms import LibroForm
+from .forms import LibroForm, UsuarioForm
 from django.core import serializers
 
 # Create your views here.
@@ -183,3 +183,24 @@ def listaApi(request):
         return JsonResponse({'mensaje': 'libro borrado exitosamente'})
 
 
+def registrarse(request):
+
+    #comprobamos el metodo de envio si es POST se trata de un formulario ya editado
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        
+        if form.is_valid(): #comprobamos que sea valido
+
+            user = form.save()
+            
+            return redirect('lista')
+
+    #si la solicitud es get rellenamos el formulario con los datos actuales
+    else:
+        form = UsuarioForm()
+    
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'registrarse.html', context)

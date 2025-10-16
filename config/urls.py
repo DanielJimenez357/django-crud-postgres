@@ -29,6 +29,7 @@ urlpatterns = [
     path("editar/<int:id>", vistas.editarLibro,  name="editar"),
     path("detalle/<int:id>", vistas.detalles,  name="detalles"),
     path("lista/api", vistas.listaApi,  name="api"),
+    path("registrarse/", vistas.registrarse,  name="registrarse"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

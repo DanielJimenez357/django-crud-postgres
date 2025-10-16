@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}My amazing site{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+<body>
+    <div>
+        {% block menu %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/registrarse">Registrarse</a></li>
+            
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
