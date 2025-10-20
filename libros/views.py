@@ -1,9 +1,8 @@
+import os, json, requests
 from os.path import splitext
-import os
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro
-import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .forms import LibroForm, UsuarioForm
@@ -205,3 +204,11 @@ def registrarse(request):
     }
 
     return render(request, 'registrarse.html', context)
+
+def fetch_google_books(request):
+    payload = {'q':'flowers+inauthor:keyes','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
+    r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
+
+    data = r.json()
+
+    return JsonResponse(data)

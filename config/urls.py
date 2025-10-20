@@ -26,13 +26,14 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name="login"),
     path('logoutfecht in /', auth_views.LogoutView.as_view(), name="login"),
     path("registrarse/", vistas.registrarse,  name="registrarse"),
-    path("", vistas.home,  name="lista"),
+    path("", vistas.home,  name="home"),
     path("lista/", vistas.lista,  name="lista"),
     path("nuevolibro/", vistas.nuevoLibro,  name="nuevoLibro"),
     path("borrar/<int:id>", vistas.borrar,  name="borrar"),
     path("editar/<int:id>", vistas.editarLibro,  name="editar"),
     path("detalle/<int:id>", vistas.detalles,  name="detalles"),
     path("lista/api", vistas.listaApi,  name="api"),
+    path("fetch/", vistas.fetch_google_books,  name="fetch"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
