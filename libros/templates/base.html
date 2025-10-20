@@ -3,12 +3,16 @@
 <head>
     <title>{% block title %}My amazing site{% endblock %}</title>
     {% load bootstrap5 %}
+    {% load static %}
     {% bootstrap_css %}
+    <link href="../static/styles.css" rel="stylesheet">
     {% bootstrap_javascript %}
 </head>
 
 <body>
     <div>
+        <script src="{% static 'functions.js' %}"></script>
+
         <script>
             window.url={
                 home: "{% url 'home' %}"
@@ -23,9 +27,8 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-link active" aria-current="page" href="/">Home</a>
-                            <a class="nav-link" href="">Features</a>
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link active" aria-current="page" href="{% url 'libreria' %}">Home</a>
+                            <a class="nav-link" href="#">Perfil</a>
                             <a class="nav-link" href="#">Log In</a>
                             <a class="nav-link" href="#">Registrate</a>
                         </div>

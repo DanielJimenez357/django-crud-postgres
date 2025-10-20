@@ -23,7 +23,7 @@ def lista(request):
     }
 
     #renderiza la plantilla que indicamos con la informacion que le pasamos
-    return render(request, 'lista.html', context)
+    return render(request, 'perfil.html', context)
 
 def detalles(request, id):
 
@@ -206,9 +206,15 @@ def registrarse(request):
     return render(request, 'registrarse.html', context)
 
 def fetch_google_books(request):
-    payload = {'q':'flowers+inauthor:keyes','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
+    payload = {'q':'Harry Potter','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
     r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
 
     data = r.json()
 
     return JsonResponse(data)
+
+
+def libreria(request):
+
+
+    return render(request, 'libreria.html')
