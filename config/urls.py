@@ -24,7 +24,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/', auth_views.LoginView.as_view(template_name='login.html'), name="login"),
-    path('logoutfecht in /', auth_views.LogoutView.as_view(), name="login"),
+    path('logout/', auth_views.LogoutView.as_view(), name="logout"),
     path("registrarse/", vistas.registrarse,  name="registrarse"),
     path("", vistas.home,  name="home"),
     path("libreria/", vistas.libreria,  name="libreria"),
@@ -35,6 +35,7 @@ urlpatterns = [
     path("detalle/<int:id>", vistas.detalles,  name="detalles"),
     path("lista/api", vistas.listaApi,  name="api"),
     path("fetch/", vistas.fetch_google_books, name="fetch"),
+    path("perfil/", vistas.perfil, name="perfil"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

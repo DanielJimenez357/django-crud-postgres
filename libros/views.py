@@ -218,3 +218,9 @@ def libreria(request):
 
 
     return render(request, 'libreria.html')
+
+
+def perfil(request):
+
+
+    return render(request, 'perfil.html')

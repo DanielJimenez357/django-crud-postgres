@@ -28,9 +28,11 @@
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <a class="nav-link active" aria-current="page" href="{% url 'libreria' %}">Home</a>
-                            <a class="nav-link" href="#">Perfil</a>
-                            <a class="nav-link" href="#">Log In</a>
-                            <a class="nav-link" href="#">Registrate</a>
+                            <a class="nav-link" href="{% url 'perfil' %}">Perfil</a>
+                            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                            <a class="nav-link" href="{% url 'registrarse' %}">Registrate</a>
+                            <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                            <h3 class="nombre_usuario">{{ user.username }}</h3>
                         </div>
                     </div>
                 </div>
