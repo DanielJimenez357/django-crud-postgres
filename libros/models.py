@@ -1,6 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 # Create your models here.
+
+class Repositorio(models.Model):
+    usuario = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
 
 class Libro(models.Model):
 
@@ -9,8 +14,7 @@ class Libro(models.Model):
     autor = models.CharField(max_length=50)
     descripcion = models.TextField()
     imagen = models.ImageField(upload_to="images")
+    repositorio = models.ForeignKey(Repositorio, on_delete=models.CASCADE, editable=False)
 
     def __str__(self):
-        return self.name
-
-
+        return self.titulo

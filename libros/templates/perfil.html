@@ -6,7 +6,7 @@
     <h2>Libreria personal</h2>
     <a class="btn btn-primary" href="{% url 'nuevoLibro' %}" role="button">Nuevo libro</a>
         <div style="display: flex;">
-            {% for libro in lista %}
+            {% for libro in repositorio %}
             <div class="card" style="width: 18rem;">
                 <img src="{{ MEDIA_URL }}{{ libro.imagen }}" class="card-img-top">
                 <div class="card-body">
@@ -18,8 +18,7 @@
         {% endfor %}
         </div>
 </div>
-
 <div class="perfil__detalles">
-    
+
 </div>
 {% endblock content %}

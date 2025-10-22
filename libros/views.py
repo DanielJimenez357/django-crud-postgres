@@ -62,6 +62,7 @@ def nuevoLibro(request):
 
             #obtenemos los datos del formulario sin guardarlo en la base de datos
             libro = form.save(commit=False)
+            libro.repositorio = request.user.repositorio
             #obtenemos la extension del archivo
             extension = splitext(libro.imagen.name)[1]
             #cambiamos el nombre del archivo al titulo del libro
@@ -222,5 +223,14 @@ def libreria(request):
 
 def perfil(request):
 
+    usuario = request.user
 
-    return render(request, 'perfil.html')
+    repositorio = usuario.repositorio
+
+    libros_repositorio = repositorio.libro_set.all()
+
+    context = {
+        'repositorio': libros_repositorio,
+    }
+
+    return render(request, 'perfil.html', context)
