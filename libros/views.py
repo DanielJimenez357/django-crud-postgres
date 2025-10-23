@@ -23,7 +23,7 @@ def lista(request):
     }
 
     #renderiza la plantilla que indicamos con la informacion que le pasamos
-    return render(request, 'perfil.html', context)
+    return render(request, 'libreria.html', context)
 
 def detalles(request, id):
 
@@ -136,15 +136,25 @@ def listaApi(request):
     #peticion POST, obtenemos el cuerpo de la peticion con los datos necesarios para crear el nuevo libro
     elif request.method == 'POST':
 
+        print("hola")
         try:
-            data = json.loads(request.body)
+            print("data")
 
-            Libro.objects.create(
-                isbn=data['isbn'],
-                titulo=data['titulo'],
-                autor=data['autor'],
-                descripcion=data['descripcion'],
-            )
+
+            data = json.loads(request.body)
+            print(data)
+
+            try:
+
+                Libro.objects.create(
+                    isbn=data['isbn'],
+                    titulo=data['titulo'],
+                    autor=data['autor'],
+                    descripcion=data['descripcion'],
+                    repositorio=request.user.repositorio
+                )
+            except Exception as e:
+                print(e)
 
             #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
             return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
@@ -207,7 +217,7 @@ def registrarse(request):
     return render(request, 'registrarse.html', context)
 
 def fetch_google_books(request):
-    payload = {'q':'Harry Potter','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
+    payload = {'q':'Cyberpunk','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
     r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
 
     data = r.json()
