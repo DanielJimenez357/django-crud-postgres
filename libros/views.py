@@ -135,11 +135,7 @@ def listaApi(request):
 
     #peticion POST, obtenemos el cuerpo de la peticion con los datos necesarios para crear el nuevo libro
     elif request.method == 'POST':
-
-        print("hola")
         try:
-            print("data")
-
 
             data = json.loads(request.body)
             print(data)
@@ -216,8 +212,12 @@ def registrarse(request):
 
     return render(request, 'registrarse.html', context)
 
+@csrf_exempt
 def fetch_google_books(request):
-    payload = {'q':'Cyberpunk','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
+    data = json.loads(request.body)
+
+
+    payload = {'q':data["query"] ,'key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
     r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
 
     data = r.json()

@@ -2,9 +2,15 @@
  * funcion fetch que pide libros segun el nombre al backend
  */
 async function getData() {
+  const query = document.querySelector(".busqueda").value
   const url = window.url.home + 'fetch/';
   try {
-    const response = await fetch(url);
+    const response = await fetch(url , {
+      method: "POST",
+      body: JSON.stringify({
+        query: query
+      })
+    });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
