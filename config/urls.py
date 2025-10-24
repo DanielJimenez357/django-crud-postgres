@@ -28,7 +28,6 @@ urlpatterns = [
     path("registrarse/", vistas.registrarse,  name="registrarse"),
     path("", vistas.home,  name="home"),
     path("libreria/", vistas.libreria,  name="libreria"),
-    path("lista/", vistas.lista,  name="lista"),
     path("nuevolibro/", vistas.nuevoLibro,  name="nuevoLibro"),
     path("borrar/<str:id>", vistas.borrar,  name="borrar"),
     path("editar/<str:id>", vistas.editarLibro,  name="editar"),

@@ -7,23 +7,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .forms import LibroForm, UsuarioForm
 from django.core import serializers
+from django.conf import settings
 
 # Create your views here.
 
 def home(request):
-    return redirect('lista')
-
-
-def lista(request):
-    lista = Libro.objects.all()
-
-    #devolvemos una coleccion en caso de añadir mas contenido en un futuro
-    context= {
-        'lista': lista,
-    }
-
-    #renderiza la plantilla que indicamos con la informacion que le pasamos
-    return render(request, 'libreria.html', context)
+    return redirect('libreria')
 
 def detalles(request, id):
 
@@ -138,8 +127,6 @@ def listaApi(request):
         try:
 
             data = json.loads(request.body)
-            print(data)
-
             try:
 
                 Libro.objects.create(
@@ -147,7 +134,8 @@ def listaApi(request):
                     titulo=data['titulo'],
                     autor=data['autor'],
                     descripcion=data['descripcion'],
-                    repositorio=request.user.repositorio
+                    repositorio=request.user.repositorio,
+                    imagen=data['url_imagen'],
                 )
             except Exception as e:
                 print(e)
@@ -239,8 +227,21 @@ def perfil(request):
 
     libros_repositorio = repositorio.libro_set.all()
 
+
+    libros_corregidos = []
+
+
+    for libro in libros_repositorio:
+        if "http" in str(libro.imagen):
+            libros_corregidos.append(libro)
+        else:
+            libro.imagen = settings.MEDIA_URL + str(libro.imagen)
+            libros_corregidos.append(libro)
+
+
+
     context = {
-        'repositorio': libros_repositorio,
+        'repositorio': libros_corregidos,
     }
 
     return render(request, 'perfil.html', context)

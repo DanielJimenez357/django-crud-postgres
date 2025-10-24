@@ -8,7 +8,7 @@
         <div style="display: flex;">
             {% for libro in repositorio %}
             <div class="card" style="width: 18rem;">
-                <img src="{{ MEDIA_URL }}{{ libro.imagen }}" class="card-img-top">
+                <img src="{{ libro.imagen }}" class="card-img-top">
                 <div class="card-body">
                     <h5 class="mb-1">{{libro.titulo}}</h5>
                     <p class="mb-1">{{libro.autor}}</p>

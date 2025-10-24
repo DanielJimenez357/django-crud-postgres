@@ -35,7 +35,7 @@ function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, d
   titulo.textContent = titulo_libro
   imagen_libro.src = imagen
   boton_post.innerHTML = "Añadir"
-  boton_post.setAttribute("onClick", `anadir_libro('${id}', '${titulo_libro}', '${autor}', '${descripcion}')`)
+  boton_post.addEventListener('click', () => anadir_libro(id, titulo_libro, autor, descripcion, imagen))
   div_hijo.appendChild(imagen_libro)
   div_hijo.appendChild(titulo)
   div_hijo.appendChild(boton_post)
@@ -66,7 +66,7 @@ async function lista_libros_DOM(){
 }
 
 
-async function anadir_libro(id, titulo_libro, autor, descripcion) {
+async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen) {
   const url = window.url.home + 'lista/api/'
   fetch(url, {
   method: "POST",
@@ -75,6 +75,7 @@ async function anadir_libro(id, titulo_libro, autor, descripcion) {
     titulo: titulo_libro,
     autor: autor,
     descripcion: descripcion,
+    url_imagen: url_imagen,
   }),
   headers: {
     "Content-type": "application/json; charset=UTF-8"
