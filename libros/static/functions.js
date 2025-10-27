@@ -28,10 +28,11 @@ async function getData() {
  */
 function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, descripcion) {
   const div_hijo = document.createElement("div")
-  const titulo = document.createElement("h3")
+  const titulo = document.createElement("h5")
   const boton_post = document.createElement("button")
   const imagen_libro = document.createElement("img")
 
+  div_hijo.classList.add("libreria__lista__libro")
   titulo.textContent = titulo_libro
   imagen_libro.src = imagen
   boton_post.innerHTML = "Añadir"
@@ -48,7 +49,7 @@ function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, d
  * añade todos los libros a un elemento padre común
  */
 async function lista_libros_DOM(){
-  const div_padre = document.querySelector(".lista_libros")
+  const div_padre = document.querySelector(".libreria__lista")
   div_padre.innerHTML = ''
   const data = await getData()
 
@@ -65,7 +66,14 @@ async function lista_libros_DOM(){
   }
 }
 
-
+/**
+ * Recoge los datos del libro para hacer una consulta POST y crear el libro en tu repositorio
+ * @param {int} id 
+ * @param {string} titulo_libro 
+ * @param {string} autor 
+ * @param {string} descripcion 
+ * @param {string} url_imagen 
+ */
 async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen) {
   const url = window.url.home + 'lista/api/'
   fetch(url, {

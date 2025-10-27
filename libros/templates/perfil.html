@@ -3,21 +3,26 @@
 {% block content %}
 
 <div class="perfil__libreria">
-    <h2>Libreria personal</h2>
-    <a class="btn btn-primary" href="{% url 'nuevoLibro' %}" role="button">Nuevo libro</a>
-        <div style="display: flex;">
+    <div class="libreria__titulo">
+        <h2>Libreria personal</h2>
+        <a class="btn btn-primary" href="{% url 'nuevoLibro' %}" role="button">Nuevo libro</a>
+    </div>
+        <div class="libreria__lista">
             {% for libro in repositorio %}
-            <div class="card" style="width: 18rem;">
+            <div class="card lista__libro" style="width: 18rem;">
                 <img src="{{ libro.imagen }}" class="card-img-top">
-                <div class="card-body">
-                    <h5 class="mb-1">{{libro.titulo}}</h5>
-                    <p class="mb-1">{{libro.autor}}</p>
-                    <a class="btn btn-success" href="{% url 'detalles' libro.isbn %}" role="button">Detalles</a>
+                <div class="card-body libro__body">
+                    <div class="libro__body__texto">
+                        <h5 class="mb-1">{{libro.titulo}}</h5>
+                        <p class="mb-1">{{libro.autor}}</p>
+                    </div>
+                    <a class="btn btn-success libro__detalles" href="{% url 'detalles' libro.isbn %}" role="button">Detalles</a>
                 </div>
             </div>
         {% endfor %}
         </div>
 </div>
+
 <div class="perfil__detalles">
 
 </div>
