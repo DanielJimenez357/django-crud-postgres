@@ -205,9 +205,9 @@ def fetch_google_books(request):
     data = json.loads(request.body)
 
 
-    payload = {'q':data["query"] ,'key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
+    payload = {'q': f'intitle:{data["query"]}','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
     r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
-
+    print(payload)
     data = r.json()
 
     return JsonResponse(data)

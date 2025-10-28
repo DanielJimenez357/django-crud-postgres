@@ -4,13 +4,16 @@
 
 {% block content %}
 
-    <input type="text" class="busqueda" placeholder="Titulo de libros a buscar">
-    <button onclick="lista_libros_DOM()">Buscar</button>
-
-    <div class="libreria__lista">
-        
+    <div class="contenedor__libreria">
+        <div class="contenedor__libreria__buscador">
+            <input type="text" class="busqueda" placeholder="Titulo de libros a buscar">
+            <button onclick="lista_libros_DOM()">Buscar</button>
+        </div>
+    
+        <div class="libreria__lista">
+            
+        </div>
     </div>
 
 
-    {% endblock content %}
-</div>
+{% endblock content %}

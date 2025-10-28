@@ -1,3 +1,24 @@
+/*APARTADO GENERAL*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    width: 60%;
+    height: 100vh;
+    background-color: rgba(200, 200, 178, 0.7);
+    backdrop-filter: blur(7px);
+}
+
+body {
+    background-image: url("../media/assets/fondo_libreria.jpg");
+    background-size: contain;
+}
+
+
+
 /*APARTADO PERFIL*/
 
 .libreria__titulo{
@@ -7,20 +28,23 @@
 
 .libreria__lista{
     display: flex;
+    content: center;
+    align-items: center;
     flex-wrap: wrap;
     padding: 1rem;
 }
 
 .lista__libro{
     margin: 0 0 1rem 1rem;
+    padding: 5px;
     max-width: 10rem;
     max-height: 20rem;
-    background-color: transparent;
+    background-color: beige;
     transition: box-shadow .3s ease-in-out;
 }
 
 .lista__libro:hover{
-    box-shadow: 0px 0px 10px 5px #606060;
+    box-shadow: 0px 0px 10px 5px #6a6666;
 }
 
 .lista__libro h5, p{
@@ -33,8 +57,20 @@
 }
 
 .libro__body{
+    display: flex;
+    flex-direction: column;
     position: relative;
     max-height: 50%;
+    align-items: center;
+}
+
+.libro__body a {
+    border: none;
+    background-color: #7F483F;
+}
+
+.libro__body a:hover{
+    background-color: #c77164;
 }
 
 .libro__detalles{
@@ -47,6 +83,10 @@
 }
 
 /*APARTADO BUSQUEDA DE LIBROS (LIBRERIA)*/
+.contenedor__libreria__buscador{
+    display: flex;
+    flex-direction: column;
+}
 
 .libreria__lista{
     display: flex;

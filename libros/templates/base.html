@@ -10,22 +10,23 @@
 </head>
 
 <body>
-    <div>
-        <script src="{% static 'functions.js' %}"></script>
-
-        <script>
-            window.url={
-                home: "{% url 'home' %}"
-            }
-
-        </script>
-        {% block menu %}
+    <div class="container">
+        <div>
+            <script src="{% static 'functions.js' %}"></script>
+            
+            <script>
+                window.url={
+                    home: "{% url 'home' %}"
+                }
+                
+            </script>
+            {% block menu %}
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <li>Book Quest</li>
                             <a class="nav-link active" aria-current="page" href="{% url 'libreria' %}">Buscar</a>
@@ -38,11 +39,12 @@
                     </div>
                 </div>
             </nav>
-        {% endblock %}
-    </div>
-
-    <div>
-        {% block content %}{% endblock %}
+            {% endblock %}
+        </div>
+        
+        <div>
+            {% block content %}{% endblock %}
+        </div>
     </div>
 </body>
 </html>
