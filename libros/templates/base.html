@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>{% block title %}My amazing site{% endblock %}</title>
+    <title>{% block title %}Book Quest{% endblock %}</title>
     {% load bootstrap5 %}
     {% load static %}
     {% bootstrap_css %}
     <link href="../static/styles.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../media/assets/book_quest_logo2.png">
     {% bootstrap_javascript %}
 </head>
 
@@ -27,13 +28,17 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                        <div class="navbar-nav">
-                            <li>Book Quest</li>
-                            <a class="nav-link active" aria-current="page" href="{% url 'libreria' %}">Buscar</a>
-                            <a class="nav-link" href="{% url 'perfil' %}">Perfil</a>
-                            <a class="nav-link" href="{% url 'login' %}">Log In</a>
-                            <a class="nav-link" href="{% url 'registrarse' %}">Registrate</a>
-                            <a class="nav-link" href="{% url 'logout' %}">Log out</a>
+                        <div class="navbar-nav barra_navegacion">
+                            <img class="logo" src="../media/assets/book_quest_logo2.png"></img>
+                            <a class="nav-link elemento_navegacion" aria-current="page" href="{% url 'libreria' %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                </svg>
+                            </a>
+                            <a class="nav-link elemento_navegacion" href="{% url 'perfil' %}">Guardados</a>
+                            <a class="nav-link elemento_navegacion" href="{% url 'login' %}">Log In</a>
+                            <a class="nav-link elemento_navegacion" href="{% url 'registrarse' %}">Registrate</a>
+                            <a class="nav-link elemento_navegacion" href="{% url 'logout' %}">Log out</a>
                             <h3 class="nombre_usuario">{{ user.username }}</h3>
                         </div>
                     </div>
