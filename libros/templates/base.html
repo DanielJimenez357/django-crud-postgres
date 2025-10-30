@@ -13,7 +13,6 @@
 <body>
     <div class="container">
         <div>
-            <script src="{% static 'functions.js' %}"></script>
             
             <script>
                 window.url={
@@ -47,9 +46,11 @@
             {% endblock %}
         </div>
         
-        <div>
+        <div class="div__content">
             {% block content %}{% endblock %}
         </div>
     </div>
+            <script src="{% static 'functions.js' %}"></script>
+
 </body>
 </html>

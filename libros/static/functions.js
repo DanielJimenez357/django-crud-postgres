@@ -1,3 +1,13 @@
+document.querySelector(".lupa_busqueda").addEventListener("click", ()=>{lista_libros_DOM()})
+let barra_busqueda = document.querySelector(".busqueda")
+
+barra_busqueda.addEventListener("keypress", (event)=>{
+  if (event.key === "Enter"){
+    event.preventDefault()
+    lista_libros_DOM()
+  }
+})
+
 /**
  * funcion fetch que pide libros segun el nombre al backend
  */
@@ -29,17 +39,28 @@ async function getData() {
 function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, descripcion) {
   const div_hijo = document.createElement("div")
   const titulo = document.createElement("h5")
-  const boton_post = document.createElement("button")
+  const boton_post = document.createElement("a")
   const imagen_libro = document.createElement("img")
+  const libro_body = document.createElement("div")
+  const libro_imagen = document.createElement("div")
+  const libro_body_texto = document.createElement("div")
 
-  div_hijo.classList.add("libreria__lista__libro")
+  libro_body_texto.classList.add("libro__body__texto")
+  libro_body_texto.appendChild(titulo)
+  libro_imagen.appendChild(imagen_libro)
+  libro_imagen.classList.add("libro__imagen")
+  libro_body.classList.add("libro__body", "card-body")
+  libro_body.appendChild(libro_body_texto)
+  libro_body.appendChild(boton_post)
+
+  div_hijo.classList.add("lista__libro", "libreria__lista__libro", "card")
   titulo.textContent = titulo_libro
   imagen_libro.src = imagen
+  boton_post.classList.add("btn", "btn-success", "libro__detalles")
   boton_post.innerHTML = "Añadir"
   boton_post.addEventListener('click', () => anadir_libro(id, titulo_libro, autor, descripcion, imagen))
-  div_hijo.appendChild(imagen_libro)
-  div_hijo.appendChild(titulo)
-  div_hijo.appendChild(boton_post)
+  div_hijo.appendChild(libro_imagen)
+  div_hijo.appendChild(libro_body)
 
   elemento_dom.appendChild(div_hijo)
 
@@ -54,7 +75,6 @@ async function lista_libros_DOM(){
   const data = await getData()
 
   for (let item of data.items) {
-    console.log(item)
     crear_libro_DOM(
         item.volumeInfo.title,
         div_padre,

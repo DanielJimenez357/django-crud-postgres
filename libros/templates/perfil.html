@@ -10,7 +10,9 @@
         <div class="libreria__lista">
             {% for libro in repositorio %}
             <div class="card lista__libro" style="width: 18rem;">
-                <img src="{{ libro.imagen }}" class="card-img-top">
+                <div class="libro__imagen">
+                    <img src="{{ libro.imagen }}" class="card-img-top">
+                </div>
                 <div class="card-body libro__body">
                     <div class="libro__body__texto">
                         <h5 class="mb-1">{{libro.titulo}}</h5>
