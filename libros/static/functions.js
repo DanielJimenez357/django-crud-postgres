@@ -25,6 +25,7 @@ async function getData() {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
+    console.log(result)
     return(result);
   } catch (error) {
     console.error(error.message);
@@ -74,14 +75,14 @@ async function lista_libros_DOM(){
   div_padre.innerHTML = ''
   const data = await getData()
 
-  for (let item of data.items) {
+  for (let item of data.docs) {
     crear_libro_DOM(
-        item.volumeInfo.title,
+        item.title,
         div_padre,
-        item.volumeInfo.industryIdentifiers[0].identifier,
-        item.volumeInfo.imageLinks.thumbnail,
-        item.volumeInfo.authors[0],
-        item.volumeInfo.description,
+        item.ia[0],
+        "https://covers.openlibrary.org/b/id/" + item.cover_i + ".jpg",
+        item.author_name[0],
+        item.title,
       )
   }
 }

@@ -201,13 +201,16 @@ def registrarse(request):
     return render(request, 'registrarse.html', context)
 
 @csrf_exempt
-def fetch_google_books(request):
+def fetch_API(request):
     data = json.loads(request.body)
 
 
-    payload = {'q': f'intitle:{data["query"]}','key':'AIzaSyChI0vno7Q7uRcQCkmfJcztkBVKyN416e0'}
-    r = requests.get('https://www.googleapis.com/books/v1/volumes', params=payload)
+    payload = {'q': data['query']}
+    print(data)
+    r = requests.get('https://openlibrary.org/search.json', params=payload)
     print(payload)
+    print(r)
+
     data = r.json()
 
     return JsonResponse(data)

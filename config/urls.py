@@ -33,7 +33,7 @@ urlpatterns = [
     path("editar/<str:id>", vistas.editarLibro,  name="editar"),
     path("detalle/<str:id>", vistas.detalles,  name="detalles"),
     path("lista/api/", vistas.listaApi,  name="api"),
-    path("fetch/", vistas.fetch_google_books, name="fetch"),
+    path("fetch/", vistas.fetch_API, name="fetch"),
     path("perfil/", vistas.perfil, name="perfil"),
 ]
 
