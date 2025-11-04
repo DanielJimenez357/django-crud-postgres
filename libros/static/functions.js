@@ -54,6 +54,8 @@ function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, d
   libro_body.appendChild(libro_body_texto)
   libro_body.appendChild(boton_post)
 
+
+
   div_hijo.classList.add("lista__libro", "libreria__lista__libro", "card")
   titulo.textContent = titulo_libro
   imagen_libro.src = imagen
@@ -76,14 +78,31 @@ async function lista_libros_DOM(){
   const data = await getData()
 
   for (let item of data.docs) {
-    crear_libro_DOM(
-        item.title,
-        div_padre,
-        item.ia[0],
-        "https://covers.openlibrary.org/b/id/" + item.cover_i + ".jpg",
-        item.author_name[0],
-        item.title,
-      )
+    try{
+      if (item.cover_i){
+        crear_libro_DOM(
+            item.title,
+            div_padre,
+            item.key,
+            "https://covers.openlibrary.org/b/id/" + item.cover_i + ".jpg",
+            item.author_name[0],
+            item.title,
+          )
+      }
+      else {
+        crear_libro_DOM(
+            item.title,
+            div_padre,
+            item.key,
+            "../media/assets/no_image.png",
+            item.author_name[0],
+            item.title,
+          )
+      }
+    }
+    catch(e){
+      console.log("Algo ha salido mal con los datos del libro: " + e )
+    }
   }
 }
 
