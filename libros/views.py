@@ -129,8 +129,11 @@ def listaApi(request):
             data = json.loads(request.body)
             try:
 
+                isbn = data['isbn']
+                isbn = isbn.split('/')[-1]
+
                 Libro.objects.create(
-                    isbn=data['isbn'],
+                    isbn=isbn,
                     titulo=data['titulo'],
                     autor=data['autor'],
                     descripcion=data['descripcion'],
