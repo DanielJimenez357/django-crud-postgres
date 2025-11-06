@@ -106,6 +106,7 @@ async function lista_libros_DOM(){
             "https://covers.openlibrary.org/b/id/" + item.cover_i + ".jpg",
             item.author_name[0],
             item.title,
+            //item.
           )
       }
       else {

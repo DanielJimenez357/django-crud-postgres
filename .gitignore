@@ -1,4 +1,4 @@
 .env
-libros/media/images
+libros/media/images/
 venv
 libros/migrations

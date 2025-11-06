@@ -147,7 +147,7 @@ body {
     align-items: center;
 }
 
-.libro__body a {
+.libro_detalles_boton {
     width: 8vh;
     max-height: 4vh;
     font-size: 1.2vh;
@@ -155,7 +155,7 @@ body {
     background-color: #7F483F;
 }
 
-.libro__body a:hover{
+.libro_detalles_boton:hover{
     background-color: #c77164;
 }
 
@@ -166,6 +166,18 @@ body {
 .libro__body__texto{
     overflow: scroll;
     height: 70%;
+}
+
+.imagen_boton_borrar{
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: 1.3vw;
+    transition: transform .2s ease-in;
+}
+
+.imagen_boton_borrar:hover{
+    transform: scale(1.4);
 }
 
 /*APARTADO BUSQUEDA DE LIBROS (LIBRERIA)*/

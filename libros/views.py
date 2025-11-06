@@ -32,14 +32,16 @@ def borrar(request, id):
 
     libro = get_object_or_404(Libro, pk=id)
 
-    os.remove('./libros/media/' + libro.imagen.name )
-    
+    try:
+        os.remove('./libros/media/' + libro.imagen.name )
+    except Exception as e:
+        print(e)
 
     #obtenemos el libro con la pk y lo borramos
     libro.delete()
 
-    #volvemos a redirigir a la lista de libros
-    return redirect('lista')
+    #volvemos a redirigir al perfil
+    return redirect('perfil')
 
 def nuevoLibro(request):
 
@@ -139,6 +141,7 @@ def listaApi(request):
                     descripcion=data['descripcion'],
                     repositorio=request.user.repositorio,
                     imagen=data['url_imagen'],
+                    numero_paginas=data['numero_paginas'],
                 )
             except Exception as e:
                 print(e)
