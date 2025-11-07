@@ -37,7 +37,7 @@ async function getData() {
  * @param {string} titulo_libro 
  * @param {dom_element} elemento_dom 
  */
-function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, descripcion) {
+function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover_id, lending_id, key) {
   const div_hijo = document.createElement("div")
   const div_padre = document.createElement("div")
   const titulo = document.createElement("h5")
@@ -52,7 +52,7 @@ function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, d
   libro_imagen.classList.add("libro__imagen")
   libro_body.classList.add("libro__body", "card-body")
   div_hijo.classList.add("lista__libro", "libreria__lista__libro", "card")
-  boton_post.classList.add("btn", "btn-success", "libro__detalles")
+  boton_post.classList.add("btn", "btn-success", "libro_detalles_boton")
   div_hijo.classList.add("oculto")
   loader.classList.add("loader")
   div_padre.classList.add("div_padre")
@@ -67,7 +67,22 @@ function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, d
   imagen_libro.src = imagen
   boton_post.innerHTML = "Añadir"
   
-  boton_post.addEventListener('click', () => anadir_libro(id, titulo_libro, autor, descripcion, imagen))
+  boton_post.addEventListener('click', async () => {
+      
+    const respuesta = await check_paginas(cover_id, lending_id, key)
+
+    console.log(respuesta)
+
+    if (respuesta.isbn_13[0]){
+      await anadir_libro(respuesta.isbn_13[0], titulo_libro, autor, respuesta.description, imagen, respuesta.number_of_pages)
+    }
+    else{
+      await anadir_libro(respuesta.key, titulo_libro, autor, respuesta.description, imagen, respuesta.number_of_pages)
+    }
+
+    
+  })
+
   imagen_libro.addEventListener("load", () =>{
 
     div_hijo.classList.add("libro_animacion")
@@ -88,6 +103,52 @@ function crear_libro_DOM(titulo_libro, elemento_dom, id, imagen="nada", autor, d
 
 }
 
+async function check_paginas (cover_id=false, lending_id=false, key) {
+
+  let response
+  let url
+  let data
+
+  if (!cover_id && !lending_id) {
+
+    url = "https://openlibrary.org" + key + "/editions.json"
+  
+    response = await fetch(url , { method: "GET" });
+
+    data = await response.json()
+
+    return data.entries[0]
+
+  }
+
+  if (cover_id) {
+
+    url = "https://openlibrary.org/books/" + cover_id + ".json"
+
+    response = await fetch(url , { method: "GET" });
+
+    data = await response.json()
+
+    return data
+
+  }
+
+  if (lending_id) {
+
+    url = "https://openlibrary.org/books/" + lending_id + ".json"
+
+    response = await fetch(url , { method: "GET" });
+
+    data = await response.json()
+
+    return data
+
+
+  }
+}
+
+
+
 /**
  * añade todos los libros a un elemento padre común
  */
@@ -102,21 +163,22 @@ async function lista_libros_DOM(){
         crear_libro_DOM(
             item.title,
             div_padre,
-            item.key,
             "https://covers.openlibrary.org/b/id/" + item.cover_i + ".jpg",
             item.author_name[0],
-            item.title,
-            //item.
+            item.cover_edition_key,
+            item.lending_edition_s,
+            item.key
           )
       }
       else {
         crear_libro_DOM(
             item.title,
             div_padre,
-            item.key,
             "../media/assets/no_image.png",
             item.author_name[0],
-            item.title,
+            item.cover_edition_key,
+            item.lending_edition_s,
+            item.key
           )
       }
     }
@@ -134,20 +196,41 @@ async function lista_libros_DOM(){
  * @param {string} descripcion 
  * @param {string} url_imagen 
  */
-async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen) {
-  const url = window.url.home + 'lista/api/'
-  fetch(url, {
-  method: "POST",
-  body: JSON.stringify({
-    isbn: id,
-    titulo: titulo_libro,
-    autor: autor,
-    descripcion: descripcion,
-    url_imagen: url_imagen,
-  }),
-  headers: {
-    "Content-type": "application/json; charset=UTF-8"
-  }
-  });
+async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, num_paginas) {
 
+  if (!id){
+  const url = window.url.home + 'lista/api/'
+    fetch(url, {
+    method: "POST",
+    body: JSON.stringify({
+      isbn: key,
+      titulo: titulo_libro,
+      autor: autor,
+      descripcion: descripcion,
+      url_imagen: url_imagen,
+      numero_paginas: num_paginas,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+    });
+
+  }
+  else{
+  const url = window.url.home + 'lista/api/'
+    fetch(url, {
+    method: "POST",
+    body: JSON.stringify({
+      isbn: id,
+      titulo: titulo_libro,
+      autor: autor,
+      descripcion: descripcion,
+      url_imagen: url_imagen,
+      numero_paginas: num_paginas,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+    });
+  }
 }
