@@ -131,9 +131,14 @@ def listaApi(request):
             data = json.loads(request.body)
             try:
 
+                print("Aqui")
+
                 isbn = data['isbn']
                 isbn = isbn.split('/')[-1]
 
+                print(isbn, data)
+
+                print(isbn)
                 Libro.objects.create(
                     isbn=isbn,
                     titulo=data['titulo'],
@@ -144,7 +149,7 @@ def listaApi(request):
                     numero_paginas=data['numero_paginas'],
                 )
             except Exception as e:
-                print(e)
+                print("Ha sucedido un error con la creacion del libro en la base de datos: " + e)
 
             #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
             return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
@@ -239,6 +244,7 @@ def perfil(request):
 
     libros_corregidos = []
 
+    paginas_totales = 0
 
     for libro in libros_repositorio:
         if "http" in str(libro.imagen):
@@ -246,11 +252,13 @@ def perfil(request):
         else:
             libro.imagen = settings.MEDIA_URL + str(libro.imagen)
             libros_corregidos.append(libro)
+        paginas_totales += libro.numero_paginas
 
 
 
     context = {
         'repositorio': libros_corregidos,
+        'numero_paginas': paginas_totales
     }
 
     return render(request, 'perfil.html', context)

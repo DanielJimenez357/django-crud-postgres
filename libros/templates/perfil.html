@@ -6,6 +6,11 @@
     <div class="libreria__titulo">
         <h2>Libreria personal</h2>
         <a class="btn btn-primary" href="{% url 'nuevoLibro' %}" role="button">Nuevo libro</a>
+        
+        <div class="detalles__lectura">
+            <p class="numero_paginas">{{numero_paginas}} paginas</p>
+            <p class="tiempo_lectura"></p>
+        </div>
     </div>
         <div class="libreria__lista">
             {% for libro in repositorio %}
@@ -28,7 +33,4 @@
         </div>
 </div>
 
-<div class="perfil__detalles">
-
-</div>
 {% endblock content %}

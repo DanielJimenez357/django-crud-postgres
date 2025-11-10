@@ -1,12 +1,18 @@
-document.querySelector(".lupa_busqueda").addEventListener("click", ()=>{lista_libros_DOM()})
-let barra_busqueda = document.querySelector(".busqueda")
 
-barra_busqueda.addEventListener("keypress", (event)=>{
-  if (event.key === "Enter"){
-    event.preventDefault()
-    lista_libros_DOM()
-  }
-})
+try{
+  document.querySelector(".lupa_busqueda").addEventListener("click", ()=>{lista_libros_DOM()})
+  let barra_busqueda = document.querySelector(".busqueda")
+  barra_busqueda.addEventListener("keypress", (event)=>{
+    if (event.key === "Enter"){
+      event.preventDefault()
+      lista_libros_DOM()
+    }
+  })
+}
+catch (e){
+  console.log("No es apartado de busqueda")
+}
+
 
 /**
  * funcion fetch que pide libros segun el nombre al backend
@@ -71,13 +77,20 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
       
     const respuesta = await check_paginas(cover_id, lending_id, key)
 
+    if (!respuesta.description) {
+      respuesta['description'] = {"value": "Sin descripcion"}
+    }
+
+    let paginas = respuesta.number_of_pages || 0
+
+
     console.log(respuesta)
 
     if (respuesta.isbn_13[0]){
-      await anadir_libro(respuesta.isbn_13[0], titulo_libro, autor, respuesta.description, imagen, respuesta.number_of_pages)
+      await anadir_libro(respuesta.isbn_13[0], titulo_libro, autor, respuesta.description.value, imagen, paginas)
     }
     else{
-      await anadir_libro(respuesta.key, titulo_libro, autor, respuesta.description, imagen, respuesta.number_of_pages)
+      await anadir_libro(respuesta.key, titulo_libro, autor, respuesta.description.value, imagen, paginas)
     }
 
     
@@ -197,26 +210,6 @@ async function lista_libros_DOM(){
  * @param {string} url_imagen 
  */
 async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, num_paginas) {
-
-  if (!id){
-  const url = window.url.home + 'lista/api/'
-    fetch(url, {
-    method: "POST",
-    body: JSON.stringify({
-      isbn: key,
-      titulo: titulo_libro,
-      autor: autor,
-      descripcion: descripcion,
-      url_imagen: url_imagen,
-      numero_paginas: num_paginas,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
-    });
-
-  }
-  else{
   const url = window.url.home + 'lista/api/'
     fetch(url, {
     method: "POST",
@@ -233,4 +226,12 @@ async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, nu
     }
     });
   }
+
+
+function calculo_tiempo_lectura () {
+  let paginas = document.querySelector(".numero_paginas").innerHTML
+  let tiempo = document.querySelector(".tiempo_lectura")
+
+  tiempo.innerHTML = (parseInt(paginas) / 20) + " h"
 }
+calculo_tiempo_lectura()
