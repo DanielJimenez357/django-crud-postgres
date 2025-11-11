@@ -2,7 +2,7 @@ import os, json, requests
 from os.path import splitext
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Libro
+from .models import Libro, Repositorio
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from .forms import LibroForm, UsuarioForm
@@ -126,37 +126,36 @@ def listaApi(request):
 
     #peticion POST, obtenemos el cuerpo de la peticion con los datos necesarios para crear el nuevo libro
     elif request.method == 'POST':
-        try:
 
             data = json.loads(request.body)
             try:
 
-                print("Aqui")
 
                 isbn = data['isbn']
                 isbn = isbn.split('/')[-1]
 
-                print(isbn, data)
+                if 'repositorio' in data:
+                    repositorio =get_object_or_404(Repositorio, pk=data['repositorio'])
+                else:
+                    repositorio = request.user.repositorio
 
-                print(isbn)
                 Libro.objects.create(
                     isbn=isbn,
                     titulo=data['titulo'],
                     autor=data['autor'],
                     descripcion=data['descripcion'],
-                    repositorio=request.user.repositorio,
+                    repositorio=repositorio,
                     imagen=data['url_imagen'],
                     numero_paginas=data['numero_paginas'],
                 )
             except Exception as e:
-                print("Ha sucedido un error con la creacion del libro en la base de datos: " + e)
+                return JsonResponse({'mensaje': 'Ha habido un error con los datos del libro en su creacion', 'error': str(e)})
+
 
             #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
             return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
         
-        #capturamos el error para devolverlo en caso de que surja algun problema
-        except Exception as e:
-            return JsonResponse({'mensaje': 'Ha habido un error con los datos del libro en su creacion', 'error': str(e)})
+        
 
     elif request.method == 'PUT':
         try:
