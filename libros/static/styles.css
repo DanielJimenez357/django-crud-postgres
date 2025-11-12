@@ -199,6 +199,21 @@ body {
     margin: 0;
 }
 
+.perfil__coleccion{
+    margin-left: 5%;
+    font-size: xx-large;
+}
+
+.perfil__anadir{
+    color: white;
+    background-color: #7F483F;
+}
+
+.perfil__anadir:hover{
+    color: white;
+    background-color: #c77164;
+}
+
 
 
 /*APARTADO BUSQUEDA DE LIBROS (LIBRERIA)*/
