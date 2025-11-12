@@ -93,7 +93,7 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
       await anadir_libro(respuesta.key, titulo_libro, autor, respuesta.description.value, imagen, paginas)
     }
 
-    
+    notificacion()
   })
 
   imagen_libro.addEventListener("load", () =>{
@@ -158,6 +158,11 @@ async function check_paginas (cover_id=false, lending_id=false, key) {
 
 
   }
+}
+
+function notificacion(){
+  const notificacion = document.querySelector(".notificacion_anadir")
+  notificacion.classList.add('.notificacion_anadir_visible')
 }
 
 

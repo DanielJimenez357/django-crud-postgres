@@ -13,6 +13,14 @@ class LibroForm(forms.ModelForm):
         fields = ['isbn', 'titulo', 'autor', 'descripcion', 'imagen']
 
 class UsuarioForm(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['username'].help_text = ''
+        
+        self.fields['password2'].help_text = '' 
+
     class Meta:
         model = User
         fields = ['username']

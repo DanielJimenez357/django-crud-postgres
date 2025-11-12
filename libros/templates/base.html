@@ -29,15 +29,39 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav barra_navegacion">
                             <img class="logo" src="../media/assets/book_quest_logo2.png"></img>
-                            <a class="nav-link elemento_navegacion" aria-current="page" href="{% url 'libreria' %}">
+                            <a class="nav-link elemento_navegacion icono_navegacion" aria-current="page" href="{% url 'libreria' %}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                 </svg>
+                                <span class="texto_icono texto_icono_buscar">Buscar</span>
                             </a>
-                            <a class="nav-link elemento_navegacion" href="{% url 'perfil' %}">Guardados</a>
-                            <a class="nav-link elemento_navegacion" href="{% url 'login' %}">Log In</a>
-                            <a class="nav-link elemento_navegacion" href="{% url 'registrarse' %}">Registrate</a>
-                            <a class="nav-link elemento_navegacion" href="{% url 'logout' %}">Log out</a>
+                            <a class="nav-link elemento_navegacion icono_navegacion" href="{% url 'perfil' %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                    <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1z"/>
+                                    <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1"/>
+                                </svg>
+                                <span class="texto_icono texto_icono_buscar">Coleccion</span>
+
+                            </a>
+
+                            <a class="nav-link elemento_navegacion icono_navegacion" href="{% url 'login' %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
+                                    <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1"/>
+                                    <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117M11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5M4 1.934V15h6V1.077z"/>
+                                </svg>
+                                <span class="texto_icono texto_icono_buscar">Iniciar sesion</span>
+                            </a>
+                            <a class="nav-link elemento_navegacion icono_navegacion" href="{% url 'registrarse' %}">
+                                <img class="register__icon" src="../media/assets/register_icon.svg" alt="register_icon">
+                                <span class="texto_icono texto_icono_buscar">Registrarse</span>
+                            </a>
+                            <a class="nav-link elemento_navegacion icono_navegacion" href="{% url 'logout' %}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                                    <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                                </svg>
+                                <span class="texto_icono texto_icono_buscar">Cerrar sesión</span>
+                            </a>
                             <h3 class="nombre_usuario">{{ user.username }}</h3>
                         </div>
                     </div>
