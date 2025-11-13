@@ -325,18 +325,57 @@ body {
 
 
 
-.notificacion_anadir{
-    z-index: 1;
-    top: -5%;
-    right: -45%;
+
+.lista_notificaciones{
     position: absolute;
-    transition: transform 2s;
+    display: flex;
+    flex-direction: column;
+    right: -50vw;
+    top: -5%;
+
+}
+
+.notificacion_anadir{
+    display: flex;
+    flex-direction: column;
+    padding: .5vw;
+    z-index: 1;
+    width: 12vw;
+    height: 4vw;
+    border-radius: 15px;
+    transition: transform .6s ease-out;
+    background-color: rgb(206, 206, 172);
+    overflow: hidden;
+    border: #505037 solid 1px;
 }
 
 .notificacion_anadir_visible{
-    transform: translateX(-100%);
+    transform: translateX(-32vw);
 }
 
+.cuenta_atras{
+    height: .8vw;
+    position: absolute;
+    width: 100%;
+    background-color: green;
+    margin-top: 2vw;
+    left: 0;
+    bottom: 0;
+}
+
+.cuenta_atras_animacion{
+    animation: cuenta_atras_animacion 3.2s linear forwards;
+}
+
+
+@keyframes cuenta_atras_animacion {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(12vw);
+    }
+}
 
 
 /* APARTADO FORMULARIOS*/

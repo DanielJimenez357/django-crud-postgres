@@ -9,7 +9,7 @@ class Repositorio(models.Model):
 
 class Libro(models.Model):
 
-    isbn = models.CharField(max_length=20, primary_key=True)
+    isbn = models.CharField(max_length=20, primary_key=True, unique=True)
     titulo = models.CharField(max_length=50)
     autor = models.CharField(max_length=50)
     descripcion = models.TextField(blank=True, null=True)

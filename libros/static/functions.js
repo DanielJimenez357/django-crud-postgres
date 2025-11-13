@@ -86,14 +86,14 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
 
     console.log(respuesta)
 
-    if (respuesta.isbn_13[0]){
-      await anadir_libro(respuesta.isbn_13[0], titulo_libro, autor, respuesta.description.value, imagen, paginas)
-    }
-    else{
-      await anadir_libro(respuesta.key, titulo_libro, autor, respuesta.description.value, imagen, paginas)
-    }
+      if ('isbn_13' in respuesta){
+        await anadir_libro(respuesta.isbn_13[0], titulo_libro, autor, respuesta.description.value, imagen, paginas)
+      }
+      else{
+        await anadir_libro(respuesta.key, titulo_libro, autor, respuesta.description.value, imagen, paginas)
+      }
+  
 
-    notificacion()
   })
 
   imagen_libro.addEventListener("load", () =>{
@@ -160,10 +160,47 @@ async function check_paginas (cover_id=false, lending_id=false, key) {
   }
 }
 
-function notificacion(){
-  const notificacion = document.querySelector(".notificacion_anadir")
-  notificacion.classList.add('.notificacion_anadir_visible')
+function notificacion(titulo, duplicado){
+  const lista_notificaciones = document.querySelector(".lista_notificaciones")
+  const notificacion = document.createElement("div")
+  const titulo_dom = document.createElement("span")
+  const contenido_notificacion = document.createElement("span")
+  const cuenta_atras = document.createElement("span")
+  const anadido = document.createElement("span")
+
+  notificacion.classList.add("notificacion_anadir")
+  contenido_notificacion.classList.add("contenido")
+  cuenta_atras.classList.add("cuenta_atras")
+  titulo_dom.innerHTML = titulo
+
+  anadido.innerHTML = " ha sido añadido a la coleccion"
+  if (duplicado){
+    anadido.innerHTML = " ya ha sido anadido a la coleccion"
+    cuenta_atras.style.backgroundColor = "red"
+  }
+
+  titulo_dom.style.fontWeight = "bolder"
+
+  contenido_notificacion.appendChild(titulo_dom)
+  contenido_notificacion.appendChild(anadido)
+
+
+  notificacion.appendChild(contenido_notificacion)
+  notificacion.appendChild(cuenta_atras)
+  lista_notificaciones.appendChild(notificacion)
+
+  notificacion.classList.add("notificacion_anadir_visible")
+  cuenta_atras.classList.add("cuenta_atras_animacion")
+
+  setTimeout(()=>{
+    notificacion.classList.remove("notificacion_anadir_visible")
+  }, 3000)
+  setTimeout(()=>{
+    cuenta_atras.classList.remove("cuenta_atras_animacion")
+    lista_notificaciones.removeChild(notificacion)
+  }, 3200)
 }
+
 
 
 
@@ -215,8 +252,11 @@ async function lista_libros_DOM(){
  * @param {string} url_imagen 
  */
 async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, num_paginas) {
+  let duplicado = false
   const url = window.url.home + 'lista/api/'
-    fetch(url, {
+
+  try{
+    const response = await fetch(url, {
     method: "POST",
     body: JSON.stringify({
       isbn: id,
@@ -230,6 +270,18 @@ async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, nu
       "Content-type": "application/json; charset=UTF-8"
     }
     });
+
+      if (response.ok){
+        notificacion(titulo_libro, duplicado)
+      }
+      if (response.status === 409){
+        duplicado = true
+        notificacion(titulo_libro, duplicado )
+      }
+  }
+  catch{
+    console.log("Ha slido mal")
+  }
   }
 
 

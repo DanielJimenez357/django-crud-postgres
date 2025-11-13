@@ -8,6 +8,7 @@ from django.http import JsonResponse
 from .forms import LibroForm, UsuarioForm
 from django.core import serializers
 from django.conf import settings
+from django.db import IntegrityError
 
 # Create your views here.
 
@@ -148,12 +149,19 @@ def listaApi(request):
                     imagen=data['url_imagen'],
                     numero_paginas=data['numero_paginas'],
                 )
+
+                #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
+                return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
+            
+            except IntegrityError:
+                return JsonResponse(
+                    {'mensaje': 'El libro con ISBN {isbn} ya existe y no puede ser añadido dos veces.'}, 
+                    status=409
+                )
             except Exception as e:
                 return JsonResponse({'mensaje': 'Ha habido un error con los datos del libro en su creacion', 'error': str(e)})
 
 
-            #devolvemos un mensaje para confirmar al usuario que su libro ha sido creado
-            return JsonResponse({'mensaje': 'libro creado exitosamente'}, status=201)
         
         
 
