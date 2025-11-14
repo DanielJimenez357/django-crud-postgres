@@ -1,6 +1,7 @@
 import os, json, requests
 from os.path import splitext
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Libro, Repositorio
 from django.views.decorators.csrf import csrf_exempt
@@ -25,6 +26,7 @@ def detalles(request, id):
         'titulo': libro.titulo,
         'autor': libro.autor,
         'descripcion': libro.descripcion,
+        'imagen': libro.imagen
     }
 
     return render(request, 'detalle.html', context)
@@ -236,10 +238,9 @@ def fetch_API(request):
 
 def libreria(request):
 
-
     return render(request, 'libreria.html')
 
-
+@login_required
 def perfil(request):
 
     usuario = request.user

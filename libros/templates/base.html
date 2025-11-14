@@ -5,7 +5,7 @@
     {% load bootstrap5 %}
     {% load static %}
     {% bootstrap_css %}
-    <link href="../static/styles.css" rel="stylesheet">
+    <link href="{% static "css/main.css" %}" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="../media/assets/book_quest_logo2.png">
     {% bootstrap_javascript %}
 </head>
@@ -62,7 +62,9 @@
                                 </svg>
                                 <span class="texto_icono texto_icono_buscar">Cerrar sesión</span>
                             </a>
-                            <h3 class="nombre_usuario">{{ user.username }}</h3>
+                            {% if request.user.is_authenticated %}
+                                <h3 class="nombre_usuario">{{ user.username }}</h3>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -74,7 +76,7 @@
             {% block content %}{% endblock %}
         </div>
     </div>
-            <script src="{% static 'functions.js' %}"></script>
+            <script src="{% static 'js/functions.js' %}"></script>
 
 </body>
 </html>

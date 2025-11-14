@@ -1,0 +1,135 @@
+.perfil__libreria{
+    flex-grow: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    overflow-y: scroll;
+}
+
+
+.libreria__titulo{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.libreria__lista{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+    flex-grow: 1;
+    min-height: 0;
+    max-height: 60%;
+}
+
+.lista__libro{
+    margin: 0 0 1rem 1rem;
+    padding: .3vw;
+    max-width: 12rem;
+    min-width: 12rem;
+    max-height: 18rem;
+    min-height: 18rem;
+
+    background-color: rgb(206, 206, 172);
+    transition: box-shadow .3s ease-in-out;
+}
+
+.lista__libro:hover{
+    box-shadow: 0px 0px 10px 5px #6a6666;
+}
+
+.lista__libro h5, p{
+    font-size: small;
+}
+
+.libro__imagen {
+    display: flex;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+.libro__imagen img {
+    width: 12vh;
+    height: 16vh;
+}
+
+.libro__body{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-height: 50%;
+    height: 50%;
+    align-items: center;
+}
+
+.libro_detalles_boton {
+    width: 8vh;
+    max-height: 4vh;
+    font-size: 1.2vh;
+    border: none;
+    background-color: #7F483F;
+    border: 1px solid #59322d;
+
+}
+
+.libro_detalles_boton:hover{
+    background-color: #c77164;
+}
+
+.libro__detalles{
+    bottom: 0;
+}
+
+.libro__body__texto{
+    overflow: scroll;
+    height: 70%;
+}
+
+.imagen_boton_borrar{
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: 15%;
+    transition: transform .2s ease-in;
+}
+
+.imagen_boton_borrar:hover{
+    transform: scale(1.4);
+}
+
+
+.detalles__lectura {
+    position: sticky;
+    height: fit-content;
+    width: 18%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    left: 78%;
+}
+
+.detalles__lectura p {
+    font-size: medium;
+    margin: 0;
+}
+
+.perfil__coleccion{
+    margin-left: 5%;
+    font-size: xx-large;
+}
+
+.perfil__anadir{
+    color: white;
+    background-color: #7F483F;
+}
+
+.perfil__anadir:hover{
+    color: white;
+    background-color: #c77164;
+}
+

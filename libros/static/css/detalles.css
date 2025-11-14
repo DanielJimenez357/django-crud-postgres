@@ -1,0 +1,29 @@
+.tarjeta_detalles__imagen{
+    width: 15vw;
+    height: 20vw;
+    border-radius: 5px;
+}
+
+.tarjeta_detalles {
+    display: flex;
+    flex-direction: row;
+}
+
+.tarjeta_detalles__body{
+    padding: .5vw;
+    border-radius: 5px;
+    margin: 1vw;
+    background-color: rgb(206, 206, 172);
+}
+
+.detalles__volver{
+    align-self: center;
+    position: relative;
+    background-color: #7F483F;
+    border: 1px solid #59322d;
+    width: 5vw;
+}
+.detalles__volver:hover{
+    border: 1px solid #59322d;
+    background-color: #c77164;
+}

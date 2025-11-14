@@ -31,7 +31,6 @@ async function getData() {
       throw new Error(`Response status: ${response.status}`);
     }
     const result = await response.json();
-    console.log(result)
     return(result);
   } catch (error) {
     console.error(error.message);
@@ -54,6 +53,8 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
   const libro_body_texto = document.createElement("div")
   const loader = document.createElement("span")
 
+  let loggeado_check = document.querySelector(".nombre_usuario")
+
   libro_body_texto.classList.add("libro__body__texto")
   libro_imagen.classList.add("libro__imagen")
   libro_body.classList.add("libro__body", "card-body")
@@ -74,6 +75,12 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
   boton_post.innerHTML = "Añadir"
   
   boton_post.addEventListener('click', async () => {
+
+    if (loggeado_check === null) {
+      const target_url = document.querySelector(".contenedor__libreria").getAttribute('data-target-url')
+      window.location.href = target_url
+      return
+    }
       
     const respuesta = await check_paginas(cover_id, lending_id, key)
 
@@ -82,9 +89,6 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
     }
 
     let paginas = respuesta.number_of_pages || 0
-
-
-    console.log(respuesta)
 
       if ('isbn_13' in respuesta){
         await anadir_libro(respuesta.isbn_13[0], titulo_libro, autor, respuesta.description.value, imagen, paginas)

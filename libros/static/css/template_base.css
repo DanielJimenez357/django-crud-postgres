@@ -1,0 +1,81 @@
+.logo{
+    height: 4vw;
+    width: 4vw;
+}
+
+.div__content{
+    flex-grow: 1; 
+    display: flex; 
+    flex-direction: column;
+    min-height: 0; 
+}
+
+.register__icon{
+    width: 1.2vw;
+}
+.icono_navegacion{
+    position: relative;
+}
+
+.icono_navegacion > svg {
+    width: 1.2vw;
+    height: 1.2vw;
+}
+
+.texto_icono {
+  visibility: hidden; 
+  width: 4vw;
+  background-color: rgb(69, 69, 69);
+  color: #ffffff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  font-size: x-small;
+  position: absolute;
+  z-index: 1; 
+  opacity: 0;
+  transition: opacity .6s;
+  top: 100%;
+  left: -50%;
+}
+
+.icono_navegacion:hover .texto_icono_buscar{
+    visibility: visible;
+    opacity: .8;
+}
+
+/*APARTADO MENU NAVEGACION*/
+.barra_navegacion{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin: .2vw;
+}
+
+.elemento_navegacion{
+    color: black;
+    display: block;
+    border-radius: 50px;
+    margin: .2vw;
+    padding: 0;
+    transition: padding .2s ease-in, background-color .4s ease-in;
+}
+
+.elemento_navegacion:hover{
+    color: black;
+    background-color: beige;
+    padding: .6vw;
+}
+
+.elemento_navegacion:active{
+    transition: padding 0s ease-in, background-color 0s ease-in;
+    padding: .8vw;
+    background-color: rgb(171, 171, 156);
+}
+
+.nombre_usuario{
+    position: relative;
+    left: 10%;
+}
