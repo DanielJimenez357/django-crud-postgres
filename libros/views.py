@@ -10,6 +10,7 @@ from .forms import LibroForm, UsuarioForm
 from django.core import serializers
 from django.conf import settings
 from django.db import IntegrityError
+from google import genai
 
 # Create your views here.
 
@@ -270,3 +271,15 @@ def perfil(request):
     }
 
     return render(request, 'perfil.html', context)
+
+
+def recomendacion_ia(request):
+    client = genai.Client()
+
+    response = client.models.generate_content(
+        model="gemini-2.0-flash-lite", contents="Devuelveme en formato json SOLO el titulo de 3 libros que sean similares a: Metro 2033, La casa de las hojas, Metro 2035, Aniquilacion, Metro 2034, The road"
+    )
+
+    print (response.text)
+
+    return JsonResponse(response.text, safe=False)
