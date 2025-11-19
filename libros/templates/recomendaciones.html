@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="perfil__libreria">
+    <div class="libreria__recomendaciones">
+        <div class="recomendaciones__libros">
+            <button onclick="obtener_libros_seleccionados()">Buscar</button>
+        </div>
+        <div class="libreria__lista">
+            {% for libro in repositorio %}
+            <div class="card lista__libro" style="width: 18rem;">
+                <div class="libro__imagen">
+                    <img src="{{ libro.imagen }}" class="card-img-top">
+                </div>
+                <div class="card-body libro__body">
+                    <div class="libro__body__texto">
+                        <h5 class="mb-1">{{libro.titulo}}</h5>
+                        <p class="mb-1">{{libro.autor}}</p>
+                    </div>
+                    <p class="boton__seleccionar">Seleccionar</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

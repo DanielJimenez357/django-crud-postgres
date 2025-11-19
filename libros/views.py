@@ -272,12 +272,28 @@ def perfil(request):
 
     return render(request, 'perfil.html', context)
 
+def pagina_recomendacion(request):
 
+    libros = Libro.objects.all()
+
+    return render(request, 'recomendaciones.html', {"repositorio": libros})
+
+@csrf_exempt
 def recomendacion_ia(request):
+    data = json.loads(request.body)
+
+    libros_recomendar = data.get('query', [])
+
+    libros_recomendar_string = ",".join(libros_recomendar)
+
     client = genai.Client()
 
+    promt = f"Usando estos libros como base: {libros_recomendar_string}, devuelve en formato json, monstrando solo el titulo, de tres libros muy parecidos a los que he pasado, para leer a continuacion"
+
+    print(data)
+
     response = client.models.generate_content(
-        model="gemini-2.0-flash-lite", contents="Devuelveme en formato json SOLO el titulo de 3 libros que sean similares a: Metro 2033, La casa de las hojas, Metro 2035, Aniquilacion, Metro 2034, The road"
+        model="gemini-2.0-flash", contents=promt
     )
 
     print (response.text)

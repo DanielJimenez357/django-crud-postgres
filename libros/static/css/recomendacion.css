@@ -1,0 +1,16 @@
+.libreria__recomendaciones{
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.recomendaciones__libros{
+    margin-left: 1vw;
+    background-color: rebeccapurple;
+    width: 300%;
+}
+
+.seleccionado {
+    border: 5px solid brown;
+}

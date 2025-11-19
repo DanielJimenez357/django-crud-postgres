@@ -35,7 +35,8 @@ urlpatterns = [
     path("lista/api/", vistas.listaApi,  name="api"),
     path("fetch/", vistas.fetch_API, name="fetch"),
     path("perfil/", vistas.perfil, name="perfil"),
-    path("recomendacion/", vistas.recomendacion_ia, name="recomendacion"),
+    path("recomendacion/", vistas.pagina_recomendacion, name="pagina_recomendacion"),
+    path("api_recomendacion/", vistas.recomendacion_ia, name="api_recomendacion"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

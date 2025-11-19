@@ -63,7 +63,7 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
   div_hijo.classList.add("oculto")
   loader.classList.add("loader")
   div_padre.classList.add("div_padre")
-
+  
   libro_body_texto.appendChild(titulo)
   libro_imagen.appendChild(imagen_libro)
   libro_body.appendChild(libro_body_texto)
@@ -73,6 +73,7 @@ function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor, cover
   titulo.textContent = titulo_libro
   imagen_libro.src = imagen
   boton_post.innerHTML = "Añadir"
+
   
   boton_post.addEventListener('click', async () => {
 
@@ -290,9 +291,74 @@ async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, nu
 
 
 function calculo_tiempo_lectura () {
-  let paginas = document.querySelector(".numero_paginas").innerHTML
-  let tiempo = document.querySelector(".tiempo_lectura")
-
-  tiempo.innerHTML = (parseInt(paginas) / 20) + " h"
+  try {
+    let paginas = document.querySelector(".numero_paginas").innerHTML
+    let tiempo = document.querySelector(".tiempo_lectura")
+  
+    tiempo.innerHTML = (parseInt(paginas) / 20) + " h"
+  }
+  catch(e){
+    console.log(e)
+  }
 }
 calculo_tiempo_lectura()
+
+
+function seleccionar () {
+
+  let coleccion = document.querySelector(".libreria__lista")
+
+  for (const elemento of coleccion.children) {
+    let boton_seleccionar = elemento.querySelector(".boton__seleccionar")
+
+    boton_seleccionar.addEventListener("click", ()=>{
+      if (elemento.classList.contains("seleccionado")){
+        elemento.classList.remove("seleccionado")
+      }
+      else{
+        elemento.classList.add("seleccionado")
+      }
+
+    })
+
+  }
+
+}
+
+async function obtener_libros_seleccionados (){
+
+  let libros_seleccionados = []
+
+  let coleccion = document.querySelector(".libreria__lista")
+
+  for (const elemento of coleccion.children){
+    if (elemento.classList.contains("seleccionado")){
+      libros_seleccionados.push(elemento.querySelector("h5").innerHTML)
+    }
+  }
+  await llamada_api_recomendacion(libros_seleccionados)
+}
+
+
+
+
+async function llamada_api_recomendacion(libros_seleccionados){
+  const url = window.url.home + 'api_recomendacion/';
+  try {
+    const response = await fetch(url , {
+      method: "POST",
+      body: JSON.stringify({
+        query: libros_seleccionados
+      })
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+seleccionar()
