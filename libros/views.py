@@ -288,7 +288,7 @@ def recomendacion_ia(request):
 
     client = genai.Client()
 
-    promt = f"Usando estos libros como base: {libros_recomendar_string}, devuelve en formato json, monstrando solo el titulo, de tres libros muy parecidos a los que he pasado, para leer a continuacion"
+    promt = f"Usando estos libros como base: {libros_recomendar_string}, monstrando solo el titulo en ingles, de tres libros muy parecidos a los que he pasado, para leer a continuacion, no digas nada mas, siguiend el formato: 'titulo1','titulo2','titulo3'"
 
     print(data)
 
@@ -296,6 +296,25 @@ def recomendacion_ia(request):
         model="gemini-2.0-flash", contents=promt
     )
 
-    print (response.text)
+    response_adaptada = response.text.split(",")
 
-    return JsonResponse(response.text, safe=False)
+    print (response.text)
+    print (response_adaptada)
+    respuesta_final = []
+
+    for titulo in response_adaptada:
+        payload = {'q': titulo}
+        r = requests.get('https://openlibrary.org/search.json', params=payload)
+        print(payload)
+        try:
+            r_objecto = r.json()
+            print(r_objecto)
+            respuesta_final.append(r_objecto["docs"][0])
+            r_lista = {
+                "docs": respuesta_final
+            }
+        except Exception as e:
+            print(e)
+            
+
+    return JsonResponse(r_lista, safe=False)
