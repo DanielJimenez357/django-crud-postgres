@@ -2,10 +2,15 @@
 
 {% block content %}
 
+<div class="lista_notificaciones">
+
+</div>
+
+
 <div class="perfil__libreria">
+    <button class="boton__buscar__seleccionados">Buscar</button>
     <div class="libreria__recomendaciones">
         <div class="recomendaciones__libros">
-            <button class="boton__buscar__seleccionados">Buscar</button>
         </div>
         <div class="libreria__lista">
             {% for libro in repositorio %}

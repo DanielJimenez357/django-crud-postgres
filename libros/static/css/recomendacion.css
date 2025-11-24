@@ -1,4 +1,5 @@
 .libreria__recomendaciones{
+    padding: 1vw;
     width: 100%;
     position: relative;
     display: flex;
@@ -6,11 +7,66 @@
 }
 
 .recomendaciones__libros{
+    padding-top: 2vw;
     margin-left: 1vw;
-    background-color: rebeccapurple;
+    height: 100vh;
+    overflow-y: scroll;
     width: 300%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #59322d;
+    background-color: #815b56;
+    border-radius: 5px;
 }
 
 .seleccionado {
-    border: 5px solid brown;
+    border: 3px solid rgb(106, 63, 29);
+}
+
+.loader__recomendacion {
+    width: 5vw;
+    margin-top: 40%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid lightblue;
+    border-right-color: #59322d;
+    animation: l2 1s infinite linear;
+}
+@keyframes l2 {to{transform: rotate(1turn)}}
+
+.boton__buscar__seleccionados{
+    position: fixed;
+    color: white;
+    z-index: 10;
+    width: 10vw;
+    background-color: #7F483F;
+    border: 1px solid #59322d;
+    border-radius: 5px;
+    align-self: center;
+}
+
+.boton__buscar__seleccionados:hover{
+    background-color: #785550;
+}
+
+.boton__buscar__seleccionados:active{
+    background-color: #a69592;
+}
+
+.boton__seleccionar{
+    color: white;
+    background-color: #7F483F;
+    border: 1px solid #59322d;
+    border-radius: 5px;
+    padding: .2vw;
+}
+
+.boton__seleccionar:hover{
+    cursor: pointer;
+    background-color: #785550;
+}
+
+.boton__seleccionar:active{
+    background-color: #a69592;
 }

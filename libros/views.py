@@ -248,7 +248,7 @@ def perfil(request):
 
     repositorio = usuario.repositorio
 
-    libros_repositorio = repositorio.libro_set.all()
+    libros_repositorio = repositorio.libro_set.all().order_by()
 
 
     libros_corregidos = []
@@ -288,12 +288,12 @@ def recomendacion_ia(request):
 
     client = genai.Client()
 
-    promt = f"Usando estos libros como base: {libros_recomendar_string}, monstrando solo el titulo en ingles, de tres libros muy parecidos a los que he pasado, para leer a continuacion, no digas nada mas, siguiend el formato: 'titulo1','titulo2','titulo3'"
+    promt = f"Usando estos libros como base: {libros_recomendar_string}, monstrando solo el titulo en ingles, de SOLO tres libros muy parecidos a los que he pasado, y que existan, para leer a continuacion, no digas nada mas, siguiend el formato: 'titulo1','titulo2','titulo3'"
 
     print(data)
 
     response = client.models.generate_content(
-        model="gemini-2.0-flash", contents=promt
+        model="gemini-2.5-flash", contents=promt
     )
 
     response_adaptada = response.text.split(",")

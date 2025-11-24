@@ -17,7 +17,7 @@ catch (e){
   console.log("No es apartado de busqueda")
 }
 
-async function check_paginas (cover_id=false, lending_id=false, key) {
+export async function check_paginas (cover_id=false, lending_id=false, key) {
 
   let response
   let url
@@ -51,15 +51,26 @@ async function check_paginas (cover_id=false, lending_id=false, key) {
 async function lista_libros_DOM(libros_seleccionados=false){
   let data
   let div_padre
+  
   if (libros_seleccionados==false){
     div_padre = document.querySelector(".libreria__lista")
+    div_padre.innerHTML = ''
+    let loader = document.createElement("div")
+    loader.classList.add("loader__recomendacion")
+    div_padre.appendChild(loader)
     data = await getData()
   }
   else {
     div_padre = document.querySelector(".recomendaciones__libros")
+    div_padre.innerHTML = ''
+    let loader = document.createElement("div")
+    loader.classList.add("loader__recomendacion")
+    div_padre.appendChild(loader)
     data = await getData(libros_seleccionados)
   }
-  div_padre.innerHTML = ''
+
+    div_padre.innerHTML = ''
+
 
   for (let item of data.docs) {
     try{
@@ -100,7 +111,7 @@ async function lista_libros_DOM(libros_seleccionados=false){
  * @param {string} descripcion 
  * @param {string} url_imagen 
  */
-async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, num_paginas) {
+export async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, num_paginas) {
   let duplicado = false
   const url = window.url.home + 'lista/api/'
 
@@ -129,7 +140,7 @@ async function anadir_libro(id, titulo_libro, autor, descripcion, url_imagen, nu
       }
   }
   catch{
-    console.log("Ha slido mal")
+    console.log("Ha salido mal")
   }
   }
 
@@ -188,3 +199,5 @@ seleccionar()
 document.querySelector(".boton__buscar__seleccionados").addEventListener("click", ()=>{
   obtener_libros_seleccionados()
 })
+
+export default {check_paginas, anadir_libro}

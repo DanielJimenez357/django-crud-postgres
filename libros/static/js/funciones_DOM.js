@@ -1,3 +1,5 @@
+import {check_paginas} from "./functions.js"
+import { anadir_libro } from "./functions.js"
 /**
  * crea el cuerpo dom para cada libro representado
  * @param {string} titulo_libro 
