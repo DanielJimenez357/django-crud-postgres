@@ -16,7 +16,7 @@ export function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor
   const libro_body_texto = document.createElement("div")
   const loader = document.createElement("span")
 
-  let loggeado_check = document.querySelector(".nombre_usuario")
+  let loggeado_check = document.getElementById("inicio_sesion_usuario")
 
   libro_body_texto.classList.add("libro__body__texto")
   libro_imagen.classList.add("libro__imagen")
@@ -40,7 +40,7 @@ export function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor
   
   boton_post.addEventListener('click', async () => {
 
-    if (loggeado_check === null) {
+    if (loggeado_check === false) {
       const target_url = document.querySelector(".contenedor__libreria").getAttribute('data-target-url')
       window.location.href = target_url
       return

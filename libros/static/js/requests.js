@@ -1,22 +1,3 @@
-/* export async function llamada_api_recomendacion(libros_seleccionados){
-const url = window.url.home + 'api_recomendacion/';
-try {
-const response = await fetch(url , {
-    method: "POST",
-    body: JSON.stringify({
-    query: libros_seleccionados
-    })
-});
-if (!response.ok) {
-    throw new Error(`Response status: ${response.status}`);
-}
-const result = await response.json();
-console.log(result);
-} catch (error) {
-console.error(error.message);
-}
-}
- */
 /**
  * funcion fetch que pide libros segun el nombre al backend
  */

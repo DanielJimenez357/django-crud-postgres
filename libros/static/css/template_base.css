@@ -36,7 +36,9 @@
   opacity: 0;
   transition: opacity .6s;
   top: 100%;
-  left: -50%;
+  left: -100%;
+  transform: translateX(27%);
+
 }
 
 .icono_navegacion:hover .texto_icono_buscar{
@@ -44,7 +46,6 @@
     opacity: .8;
 }
 
-/*APARTADO MENU NAVEGACION*/
 .barra_navegacion{
     position: relative;
     display: flex;
@@ -77,5 +78,5 @@
 
 .nombre_usuario{
     position: relative;
-    left: 10%;
+    left: 50%;
 }

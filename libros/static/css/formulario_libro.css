@@ -1,0 +1,42 @@
+.formulario__libro{
+    padding: 1vw;
+    position: relative;
+}
+
+.formulario__libro form{
+    position: relative;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario__libro input, .formulario__libro textarea{
+    border: 1px solid #815b56;
+    border-radius: 5px;
+    padding: .2vw;
+    background-color: #ceceac;
+    transition: box-shadow .5s ease;
+}
+
+.formulario__libro input:hover, .formulario__libro textarea:hover{
+    box-shadow: 0px 0px 21px 3px rgba(160, 113, 83, 0.65);
+}
+
+.formulario__libro form input:last-child{
+    align-self: center;
+    margin-top: .5vw;
+    width: 50%;
+    background-color: #815b56;
+    border: 1px solid #59322d;
+}
+
+.formulario__libro form input:last-child:hover{
+    background-color: #7f6561;
+}
+
+.formulario__libro form input:last-child:active{
+    background-color: #a69592;
+}
