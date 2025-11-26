@@ -1,6 +1,7 @@
 .formulario__libro{
     padding: 1vw;
     position: relative;
+    overflow-y: scroll;
 }
 
 .formulario__libro form{

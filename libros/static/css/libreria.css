@@ -89,7 +89,7 @@
     padding: .5vw;
     z-index: 1;
     width: 12vw;
-    height: 4vw;
+    height: fit-content;
     border-radius: 15px;
     transition: transform .6s ease-out;
     background-color: rgb(206, 206, 172);

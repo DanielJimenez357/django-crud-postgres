@@ -63,7 +63,7 @@ def nuevoLibro(request):
             #cambiamos el nombre del archivo al titulo del libro
             libro.imagen.name = form.cleaned_data['titulo'] + extension
             libro.save()
-            return redirect('lista')
+            return redirect('libreria')
 
     #si la solicitud es get rellenamos el formulario con los datos actuales
     else:
@@ -92,8 +92,11 @@ def editarLibro(request, id):
             extension = splitext(libro.imagen.name)[1]
 
             if libro.imagen.name != nombre_imagen:
-                os.remove('./libros/media/' + nombre_imagen )
-                libro.imagen.save(form.cleaned_data['titulo'] + extension, libro.imagen.file, save=False)
+                try:
+                    os.remove('./libros/media/' + nombre_imagen )
+                    libro.imagen.save(form.cleaned_data['titulo'] + extension, libro.imagen.file, save=False)
+                except Exception as e:
+                    print(e)
                 
             else:
                 nombre_a_cambiar = libro.imagen.name
@@ -107,7 +110,7 @@ def editarLibro(request, id):
             libro.save()
 
             form.save() #guardamos y redirigimos
-            return redirect('lista')
+            return redirect('libreria')
 
     #si la solicitud es get creamos un formulario vacio
     else:
@@ -208,8 +211,13 @@ def registrarse(request):
         if form.is_valid(): #comprobamos que sea valido
 
             user = form.save()
+
+            user = authenticate(username=form.cleaned_data['username'],
+                                password=form.cleaned_data['password1'],
+                                )
+            login(request, user)
             
-            return redirect('lista')
+            return redirect('libreria')
 
     #si la solicitud es get rellenamos el formulario con los datos actuales
     else:
@@ -272,6 +280,7 @@ def perfil(request):
 
     return render(request, 'perfil.html', context)
 
+@login_required
 def pagina_recomendacion(request):
 
     libros = Libro.objects.all()

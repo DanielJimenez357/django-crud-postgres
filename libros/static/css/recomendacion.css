@@ -11,7 +11,8 @@
     margin-left: 1vw;
     height: 100vh;
     overflow-y: scroll;
-    width: 300%;
+    width: 20vw;
+    min-width: 13rem;
     display: flex;
     flex-direction: column;
     align-items: center;
