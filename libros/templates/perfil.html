@@ -13,23 +13,27 @@
         </div>
     </div>
         <div class="libreria__lista">
-            {% for libro in repositorio %}
-            <div class="card lista__libro" style="width: 18rem;">
-                <div class="libro__imagen">
-                    <img src="{{ libro.imagen }}" class="card-img-top">
-                </div>
-                <div class="card-body libro__body">
-                    <div class="libro__body__texto">
-                        <h5 class="mb-1">{{libro.titulo}}</h5>
-                        <p class="mb-1">{{libro.autor}}</p>
+            {% if repositorio%}
+                {% for libro in repositorio %}
+                <div class="card lista__libro" style="width: 18rem;">
+                    <div class="libro__imagen">
+                        <img src="{{ libro.imagen }}" class="card-img-top">
                     </div>
-                    <a class="btn btn-success libro__detalles libro_detalles_boton" href="{% url 'detalles' libro.isbn %}" role="button">Detalles</a>
-                    <a class="boton_borrar" href="{% url 'borrar' libro.isbn %}">
-                        <img class="imagen_boton_borrar" src="../media/assets/delete.png" alt="delete_icon">
-                    </a>
+                    <div class="card-body libro__body">
+                        <div class="libro__body__texto">
+                            <h5 class="mb-1">{{libro.titulo}}</h5>
+                            <p class="mb-1">{{libro.autor}}</p>
+                        </div>
+                        <a class="btn btn-success libro__detalles libro_detalles_boton" href="{% url 'detalles' libro.isbn %}" role="button">Detalles</a>
+                        <a class="boton_borrar" href="{% url 'borrar' libro.isbn %}">
+                            <img class="imagen_boton_borrar" src="../media/assets/delete.png" alt="delete_icon">
+                        </a>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+                {% endfor %}
+            {% else %}
+                <h3>¡Tu coleccion esta vacia!, prueba a añadir algun libro desde el apartado de busqueda<h3>
+            {% endif %}
         </div>
 </div>
 

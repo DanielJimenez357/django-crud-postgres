@@ -69,7 +69,13 @@ async function lista_libros_DOM(libros_seleccionados=false){
     data = await getData(libros_seleccionados)
   }
 
+    console.log(data)
+
     div_padre.innerHTML = ''
+
+  if (data.numFound == 0) {
+    div_padre.innerHTML = '¡Vaya! no hemos podidos encontrar resultados para tu busqueda...'
+  }
 
 
   for (let item of data.docs) {

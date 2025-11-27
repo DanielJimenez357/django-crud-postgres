@@ -283,9 +283,15 @@ def perfil(request):
 @login_required
 def pagina_recomendacion(request):
 
+    usuario = request.user
+
+    repositorio = usuario.repositorio
+
+    libros_repositorio = repositorio.libro_set.all().order_by()
+
     libros = Libro.objects.all()
 
-    return render(request, 'recomendaciones.html', {"repositorio": libros})
+    return render(request, 'recomendaciones.html', {"repositorio": libros_repositorio})
 
 @csrf_exempt
 def recomendacion_ia(request):
