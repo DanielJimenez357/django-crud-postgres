@@ -16,16 +16,16 @@ export function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor
   const libro_body_texto = document.createElement("div")
   const loader = document.createElement("span")
 
-  let loggeado_check = document.getElementById("inicio_sesion_usuario")
+  let loggeado_check = document.getElementById("inicio_sesion_usuario").textContent
 
   libro_body_texto.classList.add("libro__body__texto")
   libro_imagen.classList.add("libro__imagen")
   libro_body.classList.add("libro__body", "card-body")
   div_hijo.classList.add("lista__libro", "libreria__lista__libro", "card")
   boton_post.classList.add("btn", "btn-success", "libro_detalles_boton")
-  div_hijo.classList.add("oculto")
   loader.classList.add("loader")
   div_padre.classList.add("div_padre")
+  imagen_libro.classList.add("oculto", "imagen_contenedor_libro")
   
   libro_body_texto.appendChild(titulo)
   libro_imagen.appendChild(imagen_libro)
@@ -40,7 +40,7 @@ export function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor
   
   boton_post.addEventListener('click', async () => {
 
-    if (loggeado_check === false) {
+    if (JSON.parse(loggeado_check) == false) {
       const target_url = document.querySelector(".contenedor__libreria").getAttribute('data-target-url')
       window.location.href = target_url
       return
@@ -60,22 +60,21 @@ export function crear_libro_DOM(titulo_libro, elemento_dom, imagen="nada", autor
       else{
         await anadir_libro(respuesta.key, titulo_libro, autor, respuesta.description.value, imagen, paginas)
       }
-  
-
   })
+
+  libro_imagen.appendChild(loader)
+
+  div_hijo.classList.add("libro_animacion")
 
   imagen_libro.addEventListener("load", () =>{
 
-    div_hijo.classList.add("libro_animacion")
-
-    div_hijo.classList.remove("oculto")
+    imagen_libro.classList.remove("oculto")
 
     loader.classList.remove("loader")
   })
 
   div_hijo.appendChild(libro_body)
 
-  div_padre.appendChild(loader)
   div_padre.appendChild(div_hijo)
 
 

@@ -4,8 +4,9 @@ import {notificacion, crear_libro_DOM} from "./funciones_DOM.js"
 
 
 try{
-  document.querySelector(".lupa_busqueda").addEventListener("click", ()=>{lista_libros_DOM()})
+  document.querySelector(".lupa__busqueda").addEventListener("click", ()=>{lista_libros_DOM()})
   let barra_busqueda = document.querySelector(".busqueda")
+  document.querySelector(".icono__borrar").addEventListener("click", ()=>{barra_busqueda.value  = "" })
   barra_busqueda.addEventListener("keypress", (event)=>{
     if (event.key === "Enter"){
       event.preventDefault()
@@ -14,7 +15,7 @@ try{
   })
 }
 catch (e){
-  console.log("No es apartado de busqueda")
+  console.log(e)
 }
 
 export async function check_paginas (cover_id=false, lending_id=false, key) {
@@ -68,8 +69,6 @@ async function lista_libros_DOM(libros_seleccionados=false){
     div_padre.appendChild(loader)
     data = await getData(libros_seleccionados)
   }
-
-    console.log(data)
 
     div_padre.innerHTML = ''
 

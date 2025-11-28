@@ -1,11 +1,13 @@
 {% extends "base.html" %} 
 
 {% block content %}
-    <form method="post">
-            {% csrf_token %}
-            <div class="formulario">
+<form method="post">
+    {% csrf_token %}
+    <div class="formulario">
+                <h3>Registro</h3>
                 {{ form }}
                 <input class="boton_input" type="submit" value="Registrarse">
+                <p class="redireccion__formulario__credenciales">¿Ya tienes una cuenta?, inicia sesion <a href="{% url "login" %}">aqui</a></p>
             </div>
     </form>
 {% endblock content %}

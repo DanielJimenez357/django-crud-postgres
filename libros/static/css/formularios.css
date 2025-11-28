@@ -1,5 +1,5 @@
 .formulario{
-    top: 30%;
+    top: 10%;
     padding: 3vw;
     background-color: #8c8c7a;
     border-radius: 30px;
@@ -17,4 +17,20 @@
     width: 50%;
     position: relative;
     align-self: center;
+}
+
+.ayuda__registro{
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+}
+.ayuda__registro p{
+    font-style: oblique;
+    font-size: larger;
+}
+
+.redireccion__formulario__credenciales{
+    margin-top: 5%;
+    text-align: center;
+    font-size: .6vw;
 }

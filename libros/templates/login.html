@@ -1,11 +1,16 @@
 {% extends "base.html" %} 
 
 {% block content %}
+    <div class="ayuda__registro">
+        <p>¡Es necesario estar registrado para poder añadir libros a tu coleccion!</p>
+    </div>
     <form method="post">
             {% csrf_token %}
             <div class="formulario">
+                <h3>Inicio de sesion</h3>
                 {{ form }}
                 <input class="boton_input" type="submit" value="Identificarse">
+                <p class="redireccion__formulario__credenciales">¿No tienes una cuenta?, registrate <a href="{% url "registrarse" %}">aqui</a></p>
             </div>
     </form>
 {% endblock content %}
