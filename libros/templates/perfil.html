@@ -24,6 +24,7 @@
                             <h5 class="mb-1">{{libro.titulo}}</h5>
                             <p class="mb-1">{{libro.autor}}</p>
                         </div>
+                        <span>{{libro.numero_paginas}} paginas</span>
                         <a class="btn btn-success libro__detalles libro_detalles_boton" href="{% url 'detalles' libro.isbn %}" role="button">Detalles</a>
                         <a class="boton_borrar" href="{% url 'borrar' libro.isbn %}">
                             <img class="imagen_boton_borrar" src="../media/assets/delete.png" alt="delete_icon">

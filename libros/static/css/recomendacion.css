@@ -71,3 +71,11 @@
 .boton__seleccionar:active{
     background-color: #a69592;
 }
+
+
+.recomendaciones__libros span{
+    color: white;
+    text-align: center;
+    padding: 1vw;
+    margin-top: 20%;
+}

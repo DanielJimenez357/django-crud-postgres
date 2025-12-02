@@ -171,18 +171,15 @@ function seleccionar () {
   for (const elemento of coleccion.children) {
     let boton_seleccionar = elemento.querySelector(".boton__seleccionar")
 
-    boton_seleccionar.addEventListener("click", ()=>{
-      if (elemento.classList.contains("seleccionado")){
-        elemento.classList.remove("seleccionado")
-      }
-      else{
-        elemento.classList.add("seleccionado")
-      }
-
+    boton_seleccionar.addEventListener("click", (e)=>{
+      e.stopPropagation()
+      elemento.classList.toggle("seleccionado")
     })
 
+    elemento.addEventListener("click", ()=>{
+      elemento.classList.toggle("seleccionado")
+    })
   }
-
 }
 
 async function obtener_libros_seleccionados (){
