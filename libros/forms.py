@@ -10,7 +10,7 @@ class LibroForm(forms.ModelForm):
 
         model = Libro
 
-        fields = ['isbn', 'titulo', 'autor', 'descripcion', 'imagen']
+        fields = ['isbn', 'titulo', 'autor', 'descripcion', 'imagen', 'numero_paginas']
 
 class UsuarioForm(UserCreationForm):
 

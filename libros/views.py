@@ -58,6 +58,9 @@ def nuevoLibro(request):
             #obtenemos los datos del formulario sin guardarlo en la base de datos
             libro = form.save(commit=False)
             libro.repositorio = request.user.repositorio
+
+            if libro.imagen == None:
+                libro.imagen = './libros/media/assets/book_quest_logo2.png'
             #obtenemos la extension del archivo
             extension = splitext(libro.imagen.name)[1]
             #cambiamos el nombre del archivo al titulo del libro
@@ -88,29 +91,37 @@ def editarLibro(request, id):
 
             libro = form.save(commit=False)
 
+            print(request.POST)
+            print(libro.imagen)
+
             #obtenemos la extension del archivo
             extension = splitext(libro.imagen.name)[1]
 
+            #se activa cuando vayamos a cambiar la imagen que subimos nosotros mismos
             if libro.imagen.name != nombre_imagen:
                 try:
                     os.remove('./libros/media/' + nombre_imagen )
                     libro.imagen.save(form.cleaned_data['titulo'] + extension, libro.imagen.file, save=False)
                 except Exception as e:
                     print(e)
-                
-            else:
+
+            elif request.POST['imagen'] != '':
                 nombre_a_cambiar = libro.imagen.name
                 media_url = './libros/media/'
 
                 #cambiamos el nombre del archivo al titulo del libro
                 libro.imagen.name = 'images/' + form.cleaned_data['titulo'] + extension
 
-                os.replace(media_url + nombre_a_cambiar , media_url + libro.imagen.name)
+                try:
+                    print(libro.imagen)
+                    os.replace(media_url + nombre_a_cambiar , media_url + libro.imagen.name)
+                except Exception as e:
+                    print(e)
 
             libro.save()
 
             form.save() #guardamos y redirigimos
-            return redirect('libreria')
+            return redirect('perfil')
 
     #si la solicitud es get creamos un formulario vacio
     else:
