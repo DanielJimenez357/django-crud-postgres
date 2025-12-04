@@ -27,7 +27,10 @@ def detalles(request, id):
         'titulo': libro.titulo,
         'autor': libro.autor,
         'descripcion': libro.descripcion,
-        'imagen': libro.imagen
+        'imagen': libro.imagen,
+        'opinion': libro.opinion,
+        'numero_paginas': libro.numero_paginas,
+        'puntuacion': libro.puntuacion
     }
 
     return render(request, 'detalle.html', context)
@@ -121,7 +124,7 @@ def editarLibro(request, id):
             libro.save()
 
             form.save() #guardamos y redirigimos
-            return redirect('perfil')
+            return redirect('detalles', id)
 
     #si la solicitud es get creamos un formulario vacio
     else:

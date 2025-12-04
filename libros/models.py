@@ -16,6 +16,8 @@ class Libro(models.Model):
     imagen = models.ImageField(upload_to="images", max_length=255, blank=True, null=True)
     repositorio = models.ForeignKey(Repositorio, on_delete=models.CASCADE, editable=False)
     numero_paginas = models.IntegerField(blank=True, null=True)
+    opinion = models.TextField(blank=True, null=True)
+    puntuacion = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return self.titulo
