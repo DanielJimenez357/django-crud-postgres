@@ -136,3 +136,9 @@
         transform: translateX(12vw);
     }
 }
+
+@media (max-width: 600px) {
+    .contenedor__libreria__buscador{
+        justify-content: end;
+    }
+}

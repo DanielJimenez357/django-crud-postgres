@@ -17,9 +17,10 @@
     position: relative;
 }
 
-.icono_navegacion > svg {
-    width: 1.2vw;
-    height: 1.2vw;
+.icono_navegacion > svg , .register__icon{
+    width: 1.5vw;
+    height: 1.5vw;
+    padding: .1vw;
 }
 
 .texto_icono {
@@ -36,8 +37,8 @@
   opacity: 0;
   transition: opacity .6s;
   top: 100%;
-  left: -100%;
-  transform: translateX(27%);
+  left: 50%;
+  transform: translateX(-50%);
 
 }
 
@@ -53,6 +54,7 @@
     align-items: center;
     width: 100%;
     margin: .2vw;
+    height: 5vw;
 }
 
 .elemento_navegacion{
@@ -62,6 +64,7 @@
     margin: .2vw;
     padding: 0;
     transition: padding .2s ease-in, background-color .4s ease-in;
+    display: flex;
 }
 
 .elemento_navegacion:hover{
@@ -79,4 +82,69 @@
 .nombre_usuario{
     position: relative;
     left: 50%;
+}
+
+@media (max-width: 992px) {
+    .icono_busqueda:last-child{
+        width: 2.5vw;
+        height: 2.5vw;
+    }
+    .texto_icono{
+        width: 10vw;
+        padding: 1vw;
+        height: fit-content;
+        font-size: xx-small;
+    }
+    .icono_busqueda{
+        right: 7%;
+    }
+
+    .icono_navegacion > svg, .register__icon{
+        width: 2vw;
+        height: 2vw;
+        margin: 1vw;
+    }
+    .elemento_navegacion:hover{
+        padding: 0;
+    }
+    .busqueda{
+        width: 60%;
+    }
+    .icono_navegacion > svg, .register__icon{
+        width: 2.5vw;
+        height: 2.5vw;
+        margin: 2vw;
+    }
+    .nombre_usuario{
+        left: 10%;
+    }
+    .icono_busqueda{
+        right: 10%;
+    }
+    .logo{
+        height: 8vw;
+        width: 8vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .busqueda{
+        width: 65%;
+    }
+    .icono_busqueda:last-child{
+        width: 4vw;
+        height: 4vw;
+    }
+    .icono_navegacion > svg, .register__icon{
+        width: 3vw;
+        height: 3vw;
+        margin: 2vw;
+    }
+    
+}
+
+@media (max-width: 600px) {
+    .busqueda{
+        width: 80%;
+    }
 }
