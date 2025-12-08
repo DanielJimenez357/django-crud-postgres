@@ -54,8 +54,8 @@
 }
 
 .libro__imagen img {
-    width: 12vh;
-    height: 16vh;
+    width: 60%;
+    height: 100%;
 }
 
 .libro__body{
@@ -133,3 +133,9 @@
     background-color: #c77164;
 }
 
+@media (max-width: 500px) {
+    .lista__libro h5{
+        font-size: larger;
+        font-weight: bolder;
+    }
+}
