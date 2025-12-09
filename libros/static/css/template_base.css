@@ -149,3 +149,41 @@
         width: 80%;
     }
 }
+
+
+@media (max-width: 500px) {
+
+    .barra_navegacion{
+        height: 10vw;
+        left: -7%;
+    }
+    .icono_navegacion > svg, .register__icon{
+        width: 8vw;
+        height: 8vw;
+        margin: 1.5vw;
+    }
+    .icono_busqueda:last-child{
+        width: 6vw;
+        height: 6vw;
+    }
+
+    .nombre_usuario{
+        display: none;
+    }
+    .logo {
+        display: none;
+    }
+    .texto_icono{
+        width: fit-content;
+        font-size: 2.5vw;
+    }
+    .elemento_navegacion{
+        margin: 1vw;
+    }
+    .busqueda{
+        height: 10vw;
+        width: 100%;
+        position: relative;
+        left: 5%;
+    }
+}

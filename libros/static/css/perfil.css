@@ -34,6 +34,9 @@
     max-height: 18rem;
     min-height: 18rem;
 
+    display: flex;
+    justify-content: space-between;
+
     background-color: rgb(206, 206, 172);
     transition: box-shadow .3s ease-in-out;
 }
@@ -65,6 +68,7 @@
     min-height: 50%;
     height: 50%;
     align-items: center;
+    flex-grow: initial;
 }
 
 .libro_detalles_boton {
@@ -126,6 +130,13 @@
 .perfil__anadir{
     color: white;
     background-color: #7F483F;
+    text-decoration: none;
+    padding: .3vw;
+    border-radius: 5px;
+    display: block;
+    text-align: center;
+    font-size: medium;
+    
 }
 
 .perfil__anadir:hover{
@@ -133,9 +144,22 @@
     background-color: #c77164;
 }
 
+@media (max-width: 900px) {
+    .detalles__lectura{
+        left: 65%;
+        flex-direction: column;
+        width: auto;
+    }
+}
+
 @media (max-width: 500px) {
     .lista__libro h5{
         font-size: larger;
         font-weight: bolder;
     }
+    .perfil__coleccion{
+        font-size: x-large;
+    }
+    
 }
+
