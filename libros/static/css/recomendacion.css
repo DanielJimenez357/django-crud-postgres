@@ -27,6 +27,7 @@
 
 .loader__recomendacion {
     width: 5vw;
+    height: 5vw;
     margin-top: 40%;
     aspect-ratio: 1;
     border-radius: 50%;
@@ -78,4 +79,34 @@
     text-align: center;
     padding: 1vw;
     margin-top: 20%;
+}
+
+@media (max-width: 1200px) {
+    .libreria__lista{
+        margin-top: 2%;
+    }
+    .libreria__recomendaciones{
+        flex-direction: column;
+    }
+    .recomendaciones__libros{
+        height: 30%;
+        width: 100%;
+        margin-left: 0;
+        flex-direction: row;
+        align-items: normal;
+        justify-content: center;
+        justify-content: flex-start;
+    }
+    .recomendaciones__libros span{
+        margin-top: 10%;
+        left: 50%;
+        position: relative;
+        transform: translateX(-50%);
+    }
+    .loader__recomendacion{
+        margin-top: 0;
+        align-self: center;
+        left: 46%;
+        position: relative;
+    }
 }
